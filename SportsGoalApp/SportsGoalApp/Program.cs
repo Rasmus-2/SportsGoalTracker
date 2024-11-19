@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using SportsGoalApp.Data;
 namespace SportsGoalApp
 {
     public class Program
@@ -5,7 +8,13 @@ namespace SportsGoalApp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var connectionString = builder.Configuration.GetConnectionString("SportsGoalAppContextConnection") ?? throw new InvalidOperationException("Connection string 'SportsGoalAppContextConnection' not found.");
 
+            builder.Services.AddDbContext<SportsGoalAppContext>(options => options.UseSqlServer(connectionString));
+
+            builder.Services.AddDefaultIdentity<Areas.Identity.Data.SportsGoalAppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<SportsGoalAppContext>();
+                
             // Add services to the container.
             builder.Services.AddRazorPages();
 
