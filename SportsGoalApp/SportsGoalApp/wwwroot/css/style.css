@@ -1,22 +1,23 @@
 ﻿.backgroundHockey {
-    position: absolute;
-    top: 50px;
+    position: relative;
+    top:0;
     left: 0;
-    background-image: url("../image/hockey.jpg");
+    background-image: url("../image/hockey1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    width: 100vw;
-    height: 500px;
-    display: flex;
+    width: 99vw;
+    height: 40vw;
     align-items: center;
     justify-content: center;
+    display: flex;
+    margin-bottom: 60px;
 }
 
-.content{
+.content {
     position: relative;
     z-index: 1;
-    color:white;
+    color: white;
 }
 
 .backgroundHockey::before{
@@ -30,3 +31,38 @@
     z-index: 0;
 }
 
+.imageRunner{
+    flex: 1;
+    background-image: url("../image/runner.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+.textNextToImage{
+    flex: 1;
+    padding:20px;
+
+}
+
+.textAndImage{
+    display: flex;
+    width: 99vw;
+    height: 35vw;
+    padding: 30px;
+}
+
+.button {
+    background-color: #93DC5C;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.button:hover{
+    background-color: #32CD32;
+}
