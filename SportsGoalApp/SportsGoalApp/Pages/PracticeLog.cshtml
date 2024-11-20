@@ -1,4 +1,40 @@
 ﻿@page
 @model SportsGoalApp.Pages.PracticeLogModel
 @{
+    var today = DateTime.Now.ToString("yyyy-MM-dd");
 }
+
+<h2>Practice Log</h2>
+
+<form method="post">
+    <div>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="Date" value="@today"/>
+    </div>
+    <div>
+        <label for="duration">Duration:</label>
+        <input type="number" id="duration" name="Duration" placeholder="30" />
+        <select id="durationUnit" name="DurationUnit">
+            <option value="minutes">Minutes</option>
+            <option value="hours">Hours</option>
+        </select>
+    </div>
+    <div>
+        <label for="activity">Activity:</label>
+        <textarea id="activity" name="Activity" placeholder="ex. practice slap shots in the backyard" rows="4" cols="50"></textarea>
+    </div>
+    <div>
+        <label for="notes">Notes:</label>
+        <textarea id="notes" name="Notes" placeholder="ex. felt good today" rows="4" cols="50"></textarea>
+    </div>
+    <div>
+        <label for="total">Total:</label>
+        <input type="number" id="total" name="Total"/>
+    </div>
+    <div>
+        <label for="succesful">Amount of succesful</label>
+        <input type="number" id="sucessful" name="succesful"/>
+    </div>
+    <button type="submit">Submit</button>
+
+</form>
