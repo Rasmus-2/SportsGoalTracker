@@ -2,3 +2,39 @@
 @model SportsGoalApp.Pages.GoalModel
 @{
 }
+
+<h1>My goals</h1>
+
+<div>
+    @foreach (var goal in Model.MyGoals)
+    {
+        <h5>@goal.Title</h5>
+        <p>@goal.Description</p>
+        <br />
+    }
+</div>
+
+<form method="post">
+    <label asp-for="NewGoal.Title">Title</label><br />
+    <input type="text" asp-for="NewGoal.Title" />
+    <br /><br />
+
+    <label asp-for="NewGoal.Description"></label><br />
+    <textarea asp-for="NewGoal.Description"></textarea>
+    <br /><br />
+
+    <label asp-for="NewGoal.StartDate">Start date</label><br />
+    <input asp-for="NewGoal.StartDate" />
+    <br /><br />
+
+    <label asp-for="NewGoal.EndDate">End date</label><br />
+    <input asp-for="NewGoal.EndDate" />
+    <br /><br />
+
+    <label asp-for="NewGoal.GoalNumber"></label><br />
+    <input asp-for="NewGoal.GoalNumber" />
+    <br /><br />
+
+    <input type="submit" class="btn btn-success" value="Create new goal" />
+    <br /><br /><br />
+</form>

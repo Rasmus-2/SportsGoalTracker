@@ -4,7 +4,32 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Sports Goals Tracker</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="backgroundHockey" style=  >
+    <div class="content">
+    <h1 class="display-2">Achieve Your Sports Goals</h1> 
+    <p>Your Personalized Sport Goal Tracker</p>
+    </div>
+</section>
+
+<section class="container mb-3">
+    <h1 class="display-4">About Sport Goal Tracker</h1>
+    <h3>Sport Goal Tracker is your personalized dashboard designed to help you achieve your sports goals. 
+        With features like goal tracking, practice scheduling, and progress visualization through interactive charts and graphs, 
+        our dashboard is tailored to enhance your sports experience and improve your performance.
+    </h3>
+    <br />
+</section>
+
+<section class="textAndImage mb-3" style="background-color: #f0f0f0">
+    <div class="imageRunner"></div>
+    <div class="textNextToImage">
+        <p>Our mission is to empower and motivate you to reach your full potential in sports by providing a comprehensive tool that fosters 
+            goal-oriented behavior and continuous improvement. Through expertly crafted suggestions and detailed progress monitoring, we aim to guide and support 
+            you in your sports journey.
+        </p>
+        <form asp-action= "Register" method="post">
+            @Html.AntiForgeryToken()
+        </form>
+        <a href="/Identity/Account/Register" class="button">Register here</a>
+    </div>
+</section>

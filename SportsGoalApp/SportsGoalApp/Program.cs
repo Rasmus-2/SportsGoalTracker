@@ -12,7 +12,7 @@ namespace SportsGoalApp
 
             builder.Services.AddDbContext<SportsGoalAppContext>(options => options.UseSqlServer(connectionString));
 
-            builder.Services.AddDefaultIdentity<Areas.Identity.Data.SportsGoalAppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            builder.Services.AddDefaultIdentity<Areas.Identity.Data.SportsGoalAppUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<SportsGoalAppContext>();
                 
             // Add services to the container.
@@ -33,6 +33,7 @@ namespace SportsGoalApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapRazorPages();
