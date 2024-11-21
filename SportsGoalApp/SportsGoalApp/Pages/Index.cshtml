@@ -17,15 +17,19 @@
         With features like goal tracking, practice scheduling, and progress visualization through interactive charts and graphs, 
         our dashboard is tailored to enhance your sports experience and improve your performance.
     </h3>
+    <br />
 </section>
 
-<section class="textAndImage" style="background-color: #f0f0f0">
+<section class="textAndImage mb-3" style="background-color: #f0f0f0">
     <div class="imageRunner"></div>
     <div class="textNextToImage">
         <p>Our mission is to empower and motivate you to reach your full potential in sports by providing a comprehensive tool that fosters 
             goal-oriented behavior and continuous improvement. Through expertly crafted suggestions and detailed progress monitoring, we aim to guide and support 
             you in your sports journey.
         </p>
-        <button class="button">Register here</button>
+        <form asp-action= "Register" method="post">
+            @Html.AntiForgeryToken()
+        </form>
+        <a href="/Identity/Account/Register" class="button">Register here</a>
     </div>
 </section>
