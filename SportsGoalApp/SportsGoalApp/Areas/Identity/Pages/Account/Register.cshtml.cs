@@ -98,6 +98,22 @@ namespace SportsGoalApp.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name = "Forename")]
+            public string Forename { get; set; }
+
+            [Required]
+            [Display(Name = "Surname")]
+            public string Surname { get; set; }
+
+            [Required]
+            [Display(Name = "Age")]
+            public string Age { get; set; }
+
+            [Required]
+            [Display(Name = "Chosen sport")]
+            public string ChosenSport { get; set; }
         }
 
 
