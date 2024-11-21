@@ -27,15 +27,24 @@ namespace SportsGoalApp.Pages
                 return Page();
             }
 
-            if(PracticeLog.TotalNumber.HasValue && PracticeLog.SuccessfulNumber.HasValue && PracticeLog.TotalNumber.Value > 0)
-            {
-                PracticeLog.Percentage = (float)PracticeLog.SuccessfulNumber / PracticeLog.TotalNumber * 100;
-            }
+            CalculatePercantage();
 
             _context.Practices.Add(PracticeLog);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
+        }
+
+        public void CalculatePercantage() {
+            
+            if (PracticeLog.TotalNumber.HasValue && PracticeLog.SuccessfulNumber.HasValue && PracticeLog.TotalNumber.Value > 0)
+            {
+                PracticeLog.Percentage = (float)PracticeLog.SuccessfulNumber / PracticeLog.TotalNumber * 100;
+            }
+            else
+            {
+                PracticeLog.Percentage = 0;
+            }
         }
     }
 }

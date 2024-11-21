@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportsGoalApp", "SportsGoalApp\SportsGoalApp.csproj", "{C7A26F53-EF0B-42E6-8865-977E0539EAD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsGoalAppTests", "SportsGoalAppTests\SportsGoalAppTests.csproj", "{C69E9B32-73A5-4478-94B1-524B17A137FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C7A26F53-EF0B-42E6-8865-977E0539EAD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7A26F53-EF0B-42E6-8865-977E0539EAD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7A26F53-EF0B-42E6-8865-977E0539EAD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C69E9B32-73A5-4478-94B1-524B17A137FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C69E9B32-73A5-4478-94B1-524B17A137FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C69E9B32-73A5-4478-94B1-524B17A137FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C69E9B32-73A5-4478-94B1-524B17A137FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
