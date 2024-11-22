@@ -109,7 +109,7 @@ namespace SportsGoalApp.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "Age")]
-            public string Age { get; set; }
+            public int Age { get; set; }
 
             [Required]
             [Display(Name = "Chosen sport")]
@@ -130,6 +130,11 @@ namespace SportsGoalApp.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+
+                user.Forename = Input.Forename;
+                user.Surname = Input.Surname;
+                user.Age = Input.Age;
+                user.ChosenSport = Input.ChosenSport;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

@@ -21,8 +21,6 @@ public class SportsGoalAppUser : IdentityUser
     [PersonalData]
     public int? Age { get; set; }
 
-    //public string? Email { get; set; }
-    //public string? Password { get; set; }
     [PersonalData]
     public string? ChosenSport { get; set; }
 }
