@@ -12,22 +12,10 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <partial name="_LoginPartial" />
                 <ul class="navbar-nav flex-grow-1 justify-content-end">
-                    @if(User.Identity.IsAuthenticated)
-                    {
-                        <li class="nav-item">
-                            <a>Hi, @User.Identity.Name</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li><a href="/Identity/Account/Login">Login</a></li>
-                    }
-                    <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                </li>
                 <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                <a class="nav-link text-dark" asp-area="" asp-page="/AICoach">AI Coach</a>
                 </li>
                 </ul>
             </div>
