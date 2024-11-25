@@ -9,9 +9,6 @@ namespace SportsGoalApp.Areas.Identity.Data;
 // Add profile data for application users by adding properties to the SportsGoalAppUser class
 public class SportsGoalAppUser : IdentityUser
 {
-    
-    public int Id { get; set; }
-
     [PersonalData]
     public string? Forename { get; set; }
 
