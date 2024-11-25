@@ -8,6 +8,15 @@
 
 <form method="post">
     <div>
+        <label for="goal">Goal</label>
+        <select id="goal" name="GoalId">
+            @foreach (var goal in Model.Goals)
+            {
+                <option value="@goal.Id">@goal.Title</option>
+            }
+        </select>
+    </div>
+    <div>
         <label for="date">Date:</label>
         <input type="date" id="date" name="Date" value="@today"/>
     </div>
@@ -32,8 +41,8 @@
         <input type="number" id="total" name="TotalNumber"/>
     </div>
     <div>
-        <label for="succesful">Amount of succesful</label>
-        <input type="number" id="sucessful" name="successfulNumber"/>
+        <label for="successful">Amount of successful</label>
+        <input type="number" id="successful" name="successfulNumber"/>
     </div>
     <button type="submit">Submit</button>
 
