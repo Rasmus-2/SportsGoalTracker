@@ -1,0 +1,16 @@
+﻿@page
+@model SportsGoalApp.Pages.AllGoalsModel
+@{
+}
+
+<h3>My goals</h3><br />
+
+<div>
+    @foreach (var goal in Model.MyGoals)
+    {
+        <h5>@goal.Title</h5>
+        <p>@goal.Description</p>
+        <p>@goal.StartDate --- @goal.EndDate</p>
+        <br />
+    }
+</div>

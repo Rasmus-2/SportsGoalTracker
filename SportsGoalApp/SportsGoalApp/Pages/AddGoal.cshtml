@@ -1,18 +1,9 @@
 ﻿@page
-@model SportsGoalApp.Pages.GoalModel
+@model SportsGoalApp.Pages.AddGoalModel
 @{
 }
 
-<h1>My goals</h1>
-
-<div>
-    @foreach (var goal in Model.MyGoals)
-    {
-        <h5>@goal.Title</h5>
-        <p>@goal.Description</p>
-        <br />
-    }
-</div>
+<h3>Add goal</h3>
 
 <form method="post">
     <label asp-for="NewGoal.Title">Title</label><br />
