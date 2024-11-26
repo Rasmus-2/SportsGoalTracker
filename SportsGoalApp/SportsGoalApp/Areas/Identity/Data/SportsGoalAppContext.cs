@@ -5,7 +5,7 @@ using SportsGoalApp.Areas.Identity.Data;
 
 namespace SportsGoalApp.Data;
 
-public class SportsGoalAppContext : IdentityDbContext<SportsGoalAppUser>
+public class SportsGoalAppContext : IdentityDbContext<SportsGoalAppUser>, ISportsGoalAppContext
 {
     public SportsGoalAppContext(DbContextOptions<SportsGoalAppContext> options)
         : base(options)
@@ -20,6 +20,6 @@ public class SportsGoalAppContext : IdentityDbContext<SportsGoalAppUser>
         // Add your customizations after calling base.OnModelCreating(builder);
     }
 
-    public DbSet<Models.Goal> Goals { get; set; } 
-    public DbSet<Models.PracticeLog> Practices { get; set; }
+    public DbSet<Models.Goal> Goal { get; set; } 
+    public DbSet<Models.PracticeLog> PracticeLog { get; set; }
 }

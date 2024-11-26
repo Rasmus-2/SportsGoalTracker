@@ -29,7 +29,7 @@ namespace SportsGoalApp.Pages
 
             CalculatePercantage();
 
-            _context.Practices.Add(PracticeLog);
+            _context.PracticeLog.Add(PracticeLog);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

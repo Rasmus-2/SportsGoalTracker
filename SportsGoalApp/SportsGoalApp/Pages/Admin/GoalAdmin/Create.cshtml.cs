@@ -35,7 +35,7 @@ namespace SportsGoalApp.Pages.Admin.GoalAdmin
                 return Page();
             }
 
-            _context.Goals.Add(Goal);
+            _context.Goal.Add(Goal);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

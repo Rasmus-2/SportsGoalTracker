@@ -1,6 +1,7 @@
 ﻿@page
 @model SportsGoalApp.Pages.AddGoalModel
 @{
+    var today = DateTime.Now.ToString("yyyy-MM-dd");
 }
 
 <h3>Add goal</h3>
@@ -15,11 +16,11 @@
     <br /><br />
 
     <label asp-for="NewGoal.StartDate">Start date</label><br />
-    <input asp-for="NewGoal.StartDate" />
+    <input asp-for="NewGoal.StartDate" type = "date" value="@today"/>
     <br /><br />
 
     <label asp-for="NewGoal.EndDate">End date</label><br />
-    <input asp-for="NewGoal.EndDate" />
+    <input asp-for="NewGoal.EndDate" type="date" value="@today" />
     <br /><br />
 
     <label asp-for="NewGoal.GoalNumber"></label><br />

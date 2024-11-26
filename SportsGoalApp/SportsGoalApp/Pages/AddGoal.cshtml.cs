@@ -33,7 +33,7 @@ namespace SportsGoalApp.Pages
             NewGoal.UserId = user.Id;
             NewGoal.Category = 1;
 
-            _context.Goals.Add(NewGoal);
+            _context.Goal.Add(NewGoal);
             await _context.SaveChangesAsync();
 
             return RedirectToPage();
