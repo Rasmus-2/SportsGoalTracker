@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SportsGoalAppTests
 {
-    public class ChartAPITest
+    public class ChartControllerTest
     {
         [Fact]
         public void GetChartData_ShouldReturnPercentageData()

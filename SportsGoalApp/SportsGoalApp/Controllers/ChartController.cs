@@ -17,12 +17,6 @@ namespace SportsGoalApp.Controllers
             _context = context;
         }
 
-        //public ChartController(global::SportsGoalAppTests.ISportsGoalAppContext @object)
-        //{
-        //    Object = @object;
-        //}
-
-        //public global::SportsGoalAppTests.ISportsGoalAppContext Object { get; }
 
         [HttpGet("data")]
         public IActionResult GetChartData()
