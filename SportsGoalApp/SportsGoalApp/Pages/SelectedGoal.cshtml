@@ -3,9 +3,26 @@
 @{
 }
 
-<h2>@Model.SelectedGoal.Title</h2>
-<p>Category: @Model.SelectedGoal.Category</p>
-<p>@Model.SelectedGoal.Description</p>
-<p>@Model.SelectedGoal.StartDate --- @Model.SelectedGoal.EndDate</p>
-<p>Target to reach: @Model.SelectedGoal.GoalNumber</p>
+<div class="row">
+    <div class="col-5">
+        <h2>@Model.SelectedGoal.Title</h2>
+        <p>Category: @Model.SelectedGoal.Category</p>
+        <p>@Model.SelectedGoal.Description</p>
+        <p>@Model.SelectedGoal.StartDate --- @Model.SelectedGoal.EndDate</p>
+        <p>Target to reach: @Model.SelectedGoal.GoalNumber</p>
+        <br /><br />
+    </div>
+
+    <div class="col-7">
+        @foreach (var log in Model.SelectedGoalLogs)
+        {
+            <h4>@log.Activity</h4>
+            <p>@log.DateTime</p>
+            <p>@log.Duration</p>
+            <p>@log.Notes</p>
+            <p>@log.SuccessfulNumber / @log.TotalNumber = @log.Percentage % success rate</p>
+            <br />
+        }
+    </div>
+</div>
 

@@ -23,6 +23,9 @@ namespace SportsGoalApp.Pages
         [BindProperty]
         public Goal SelectedGoal { get; set; }
 
+        [BindProperty]
+        public List<PracticeLog> SelectedGoalLogs { get; set; }
+
         public async Task OnGetAsync(int goalId = 3)
         {
             SportsGoalAppUser user = await _userManager.GetUserAsync(User);
@@ -31,6 +34,13 @@ namespace SportsGoalApp.Pages
             if (user.Id == goalToShow.UserId)
             {
                 SelectedGoal = goalToShow;
+            }
+
+            var currentGoalPracticeLogs = await _context.Practices.Where(p => p.GoalId == goalToShow.Id).ToListAsync();
+
+            if(currentGoalPracticeLogs != null)
+            {
+                SelectedGoalLogs = currentGoalPracticeLogs.OrderByDescending(g => g.DateTime).ToList();
             }
         }
     }
