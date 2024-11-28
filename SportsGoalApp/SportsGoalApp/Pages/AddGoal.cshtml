@@ -3,6 +3,8 @@
 @{
 }
 
+@Model.ErrorMessage
+
 <h3>Add goal</h3>
 
 <form method="post">
@@ -14,12 +16,17 @@
     <textarea asp-for="NewGoal.Description"></textarea>
     <br /><br />
 
+    <select asp-for="NewGoal.Category" asp-items="Html.GetEnumSelectList<Enums.GoalCategories>()">
+        <option selected="selected" value="">Please choose</option>
+    </select>
+    <br /><br />
+
     <label asp-for="NewGoal.StartDate">Start date</label><br />
-    <input asp-for="NewGoal.StartDate" />
+    <input asp-for="NewGoal.StartDate" type="date" />
     <br /><br />
 
     <label asp-for="NewGoal.EndDate">End date</label><br />
-    <input asp-for="NewGoal.EndDate" />
+    <input asp-for="NewGoal.EndDate" type="date" />
     <br /><br />
 
     <label asp-for="NewGoal.GoalNumber"></label><br />
