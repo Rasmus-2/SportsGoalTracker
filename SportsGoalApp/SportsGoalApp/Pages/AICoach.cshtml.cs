@@ -19,7 +19,7 @@ namespace SportsGoalApp.Pages
 
         public async Task OnGetAsync()
         {
-            var payload = new { RawSentence = "What are the benefits of exercise?" };
+            var payload = new { RawSentence = "I practice hockey shots today, but I didn't feel good. I'm not sure I can handle this" };
             var jsonPayload = JsonSerializer.Serialize(payload);
             var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 

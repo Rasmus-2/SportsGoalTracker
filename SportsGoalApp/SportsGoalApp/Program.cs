@@ -18,7 +18,8 @@ namespace SportsGoalApp
             // Add services to the container.
             builder.Services.AddRazorPages();
 
-
+            // Register HttpClient
+            builder.Services.AddHttpClient();
 
             var app = builder.Build();
 

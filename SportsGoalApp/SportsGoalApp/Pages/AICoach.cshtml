@@ -8,8 +8,7 @@
 
 @if (!string.IsNullOrEmpty(Model.Completion))
 {
-    <h4>ChatGPT's Response:</h4>
-    <p>@Model.Completion</p>
+    <blockquote>@Model.Completion</blockquote>
 }
 else
 {

@@ -34,7 +34,7 @@ namespace OpenAIApi.Controllers
 
             var openai = new ChatGpt(openAiKey);
 
-            var fixedSentence = await openai.Ask($"Fix sentence: { request.RawSentence} ");
+            var fixedSentence = await openai.Ask($"Give coaching advice: { request.RawSentence} ");
 
             if(fixedSentence == null)
             {
