@@ -27,15 +27,23 @@ namespace SportsGoalApp.Pages
         public List<Models.Goal> CurrentGoals {  get; set; }
         public List<Models.Goal> FutureGoals {  get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int showGoalId)
+        public async Task<IActionResult> OnGetAsync(int showGoalId, int deleteGoalId)
         {
+            SportsGoalAppUser user = await _userManager.GetUserAsync(User);
+            MyGoals = await _context.Goals.Where(g => g.UserId == user.Id).ToListAsync();
+
             if(showGoalId != 0)
             {
                 return RedirectToPage("./SelectedGoal", "OnGetAsync", new { goalId = showGoalId });
             }
 
-            SportsGoalAppUser user = await _userManager.GetUserAsync(User);
-            MyGoals = await _context.Goals.Where(g => g.UserId == user.Id).ToListAsync();
+            if(deleteGoalId != 0)
+            {
+                var goalToDelete = MyGoals.Where(g => g.Id == deleteGoalId).FirstOrDefault();
+                _context.Goals.Remove(goalToDelete);
+                _context.SaveChanges();
+                MyGoals.Remove(goalToDelete);
+            }
 
             foreach (var goal in MyGoals)
             {
