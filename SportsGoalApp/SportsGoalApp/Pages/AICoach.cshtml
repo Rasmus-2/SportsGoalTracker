@@ -1,0 +1,17 @@
+﻿@page
+@model SportsGoalApp.Pages.AICoachModel
+@{
+    ViewData["Title"] = "AI Coach";
+}
+
+<h3>AI Coach</h3>
+
+@if (!string.IsNullOrEmpty(Model.Completion))
+{
+    <h4>ChatGPT's Response:</h4>
+    <p>@Model.Completion</p>
+}
+else
+{
+    <p>Loading response...</p>
+}
