@@ -25,7 +25,7 @@ namespace OpenAIApi.Controllers
         [HttpPost("fixGrammar")]
         public async Task<IActionResult> FixGrammar([FromBody] SentencePayloadRequest request)
         {
-            var openAiKey = _configuration["OPEN_API_KEY"];
+            var openAiKey = _configuration["open-api-key"];
 
             if(openAiKey == null)
             {
