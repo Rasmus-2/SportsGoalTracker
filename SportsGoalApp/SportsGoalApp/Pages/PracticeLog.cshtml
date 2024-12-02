@@ -6,44 +6,74 @@
 
 <h2>Practice Log</h2>
 
+<!-- Validation Summary -->
+
 <form method="post">
-    <div>
-        <label for="goal">Goal</label>
-        <select id="goal" name="GoalId">
-            @foreach (var goal in Model.Goals)
-            {
-                <option value="@goal.Id">@goal.Title</option>
-            }
-        </select>
+    <!-- Goal Selection -->
+    <div class="mb-3">
+        <label asp-for="PracticeLog.GoalId" class="form-label">Goal</label>
+        @if (Model.Goals != null && Model.Goals.Any())
+        {
+            <select asp-for="PracticeLog.GoalId" class="form-select">
+                @foreach (var goal in Model.Goals)
+                {
+                    <option value="@goal.Id">@goal.Title</option>
+                }
+            </select>
+        }
+        else
+        {
+            <p class="text-danger">No goals available. Please add a goal first.</p>
+        }
+        <span asp-validation-for="PracticeLog.GoalId" class="text-danger"></span>
     </div>
-    <div>
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="Date" value="@today"/>
+
+    <!-- Date -->
+    <div class="mb-3">
+        <label asp-for="PracticeLog.DateTime" class="form-label">Date</label>
+        <input asp-for="PracticeLog.DateTime" type="date" value="@today" class="form-control" />
+        <span asp-validation-for="PracticeLog.DateTime" class="text-danger"></span>
     </div>
-    <div>
-        <label for="duration">Duration:</label>
-        <input type="number" id="duration" name="Duration" placeholder="30" />
-        <select id="durationUnit" name="DurationUnit">
+
+    <!-- Duration -->
+    <div class="mb-3">
+        <label asp-for="PracticeLog.Duration" class="form-label">Duration</label>
+        <input asp-for="PracticeLog.Duration" type="number" placeholder="Enter duration" id="durationInput" class="form-control" />
+        <select asp-for="PracticeLog.DurationUnit" id="durationUnit" class="form-select mt-2">
             <option value="minutes">Minutes</option>
             <option value="hours">Hours</option>
         </select>
+        <span asp-validation-for="PracticeLog.Duration" class="text-danger"></span>
     </div>
-    <div>
-        <label for="activity">Activity:</label>
-        <textarea id="activity" name="Activity" placeholder="ex. practice slap shots in the backyard" rows="4" cols="50"></textarea>
-    </div>
-    <div>
-        <label for="notes">Notes:</label>
-        <textarea id="notes" name="Notes" placeholder="ex. felt good today" rows="4" cols="50"></textarea>
-    </div>
-    <div>
-        <label for="total">Total:</label>
-        <input type="number" id="total" name="TotalNumber"/>
-    </div>
-    <div>
-        <label for="successful">Amount of successful</label>
-        <input type="number" id="successful" name="successfulNumber"/>
-    </div>
-    <button type="submit">Submit</button>
 
+    <!-- Activity -->
+    <div class="mb-3">
+        <label asp-for="PracticeLog.Activity" class="form-label">Activity</label>
+        <textarea asp-for="PracticeLog.Activity" class="form-control" rows="3" placeholder="e.g., practice slap shots in the backyard"></textarea>
+        <span asp-validation-for="PracticeLog.Activity" class="text-danger"></span>
+    </div>
+
+    <!-- Notes -->
+    <div class="mb-3">
+        <label asp-for="PracticeLog.Notes" class="form-label">Notes</label>
+        <textarea asp-for="PracticeLog.Notes" class="form-control" rows="3" placeholder="e.g., felt good today"></textarea>
+        <span asp-validation-for="PracticeLog.Notes" class="text-danger"></span>
+    </div>
+
+    <!-- Total Number -->
+    <div class="mb-3">
+        <label asp-for="PracticeLog.TotalNumber" class="form-label">Total</label>
+        <input asp-for="PracticeLog.TotalNumber" type="number" class="form-control" />
+        <span asp-validation-for="PracticeLog.TotalNumber" class="text-danger"></span>
+    </div>
+
+    <!-- Successful Number -->
+    <div class="mb-3">
+        <label asp-for="PracticeLog.SuccessfulNumber" class="form-label">Amount of Successful</label>
+        <input asp-for="PracticeLog.SuccessfulNumber" type="number" class="form-control" />
+        <span asp-validation-for="PracticeLog.SuccessfulNumber" class="text-danger"></span>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
