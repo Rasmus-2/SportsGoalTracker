@@ -23,7 +23,7 @@ namespace SportsGoalApp.Pages.Admin.GoalAdmin
 
         public async Task OnGetAsync()
         {
-            Goal = await _context.Goals.ToListAsync();
+            Goal = await _context.Goal.ToListAsync();
         }
     }
 }
