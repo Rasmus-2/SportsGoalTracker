@@ -24,7 +24,7 @@ jobs:
 
     
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore SportsGoalApp/SportsGoalAppTests.csproj
 
     
     - name: Build
