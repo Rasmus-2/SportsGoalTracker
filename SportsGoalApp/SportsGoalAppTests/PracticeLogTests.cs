@@ -5,11 +5,12 @@ namespace SportsGoalAppTests
 {
     public class PracticeLogTests
     {
+
         [Theory]
         [InlineData(100, 50, 50)]
         [InlineData(200, 100, 50)]
         [InlineData(100, 100, 100)]
-        public void CalculatePercantage_ValidInputs_ReturnExpectedPercentage(int totalNumber, int successfulNumber, float expectedPercentage)
+        public void CalculatePercantage_ValidInputs_ReturnExpectedPercentage(int totalNumber, int successfulNumber, float expected)
         {
             // Arrange
             var practiceLog = new PracticeLog
@@ -18,18 +19,20 @@ namespace SportsGoalAppTests
                 SuccessfulNumber = successfulNumber
             };
 
+            float actual = 0;
+
             // Act
             if (practiceLog.TotalNumber.HasValue && practiceLog.SuccessfulNumber.HasValue && practiceLog.TotalNumber.Value > 0)
             {
-                practiceLog.Percentage = (float)practiceLog.SuccessfulNumber.Value / practiceLog.TotalNumber.Value * 100;
+                actual = (float)practiceLog.SuccessfulNumber.Value / practiceLog.TotalNumber.Value * 100;
             }
             else
             {
-                practiceLog.Percentage = 0;
+                actual = 0;
             }
 
             // Assert 
-            Assert.Equal(expectedPercentage, practiceLog.Percentage);
+            Assert.Equal(expected, actual);
         }
         
         [Theory]
@@ -44,18 +47,21 @@ namespace SportsGoalAppTests
                 SuccessfulNumber = successfulNumber
             };
 
+            float actual = 0;
+            float expected = 0;
+
             // Act
             if (practiceLog.TotalNumber.HasValue && practiceLog.SuccessfulNumber.HasValue && practiceLog.TotalNumber.Value > 0)
             {
-                practiceLog.Percentage = (float)practiceLog.SuccessfulNumber.Value / practiceLog.TotalNumber.Value * 100;
+                actual = (float)practiceLog.SuccessfulNumber.Value / practiceLog.TotalNumber.Value * 100;
             }
             else
             {
-                practiceLog.Percentage = 0;
+                actual = 0;
             }
 
             // Assert
-            Assert.Equal(0, practiceLog.Percentage);
+            Assert.Equal(expected, actual);
         }
 
         [Theory]
@@ -71,19 +77,22 @@ namespace SportsGoalAppTests
                 SuccessfulNumber = successfulNumber
             };
 
+            float expected = 0;
+            float actual = 0;
+
             // Act
             if (practiceLog.TotalNumber.HasValue && practiceLog.SuccessfulNumber.HasValue && practiceLog.TotalNumber.Value > 0)
             {
-                practiceLog.Percentage = (float)practiceLog.SuccessfulNumber.Value / practiceLog.TotalNumber.Value * 100;
+                actual = (float)practiceLog.SuccessfulNumber.Value / practiceLog.TotalNumber.Value * 100;
             }
             else
             {
-                practiceLog.Percentage = 0;
+                actual = 0;
             }
 
 
             // Assert
-            Assert.Equal(0, practiceLog.Percentage);
+            Assert.Equal(expected, actual);
         }
 
         [Theory]
@@ -92,7 +101,7 @@ namespace SportsGoalAppTests
         [InlineData(90, 60, 66.66667)]
         [InlineData(200, 133, 66.5)]
         [InlineData(75, 25, 33.33333)]
-        public void CalculatePercentage_DifferentValidInputs_ReturnsExpectedPercentageWithDecimals(int totalNumber, int successfulNumber, float expectedPercentage)
+        public void CalculatePercentage_DifferentValidInputs_ReturnsExpectedPercentageWithDecimals(int totalNumber, int successfulNumber, float expected)
         {
             // Arrange
             var practiceLog = new PracticeLog
@@ -101,18 +110,21 @@ namespace SportsGoalAppTests
                 SuccessfulNumber = successfulNumber,
             };
 
+            float actual = 0;
+
             // Act
             if (practiceLog.TotalNumber.HasValue && practiceLog.SuccessfulNumber.HasValue && practiceLog.TotalNumber.Value > 0)
             {
-                practiceLog.Percentage = (float)practiceLog.SuccessfulNumber.Value / practiceLog.TotalNumber.Value * 100;
+                actual = (float)practiceLog.SuccessfulNumber.Value / practiceLog.TotalNumber.Value * 100;
             }
             else
             {
-                practiceLog.Percentage = 0;
+                actual = 0;
             }
 
             // Assert
-            Assert.Equal((double)expectedPercentage, (double)practiceLog.Percentage, precision: 5);
+            float tolerance = 0.00001f;
+            Assert.InRange(actual, expected - tolerance, expected + tolerance);
         }
     }
 }

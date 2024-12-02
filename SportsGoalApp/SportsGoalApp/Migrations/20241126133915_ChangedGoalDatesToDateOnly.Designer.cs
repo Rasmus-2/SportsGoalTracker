@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SportsGoalApp.Data;
 
@@ -11,9 +12,11 @@ using SportsGoalApp.Data;
 namespace SportsGoalApp.Migrations
 {
     [DbContext(typeof(SportsGoalAppContext))]
-    partial class SportsGoalAppContextModelSnapshot : ModelSnapshot
+    [Migration("20241126133915_ChangedGoalDatesToDateOnly")]
+    partial class ChangedGoalDatesToDateOnly
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,7 +247,7 @@ namespace SportsGoalApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Category")
+                    b.Property<int?>("Category")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -268,7 +271,7 @@ namespace SportsGoalApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Goal");
+                    b.ToTable("Goals");
                 });
 
             modelBuilder.Entity("SportsGoalApp.Models.PracticeLog", b =>
@@ -305,7 +308,7 @@ namespace SportsGoalApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PracticeLog");
+                    b.ToTable("Practices");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
