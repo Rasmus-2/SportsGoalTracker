@@ -28,9 +28,9 @@ jobs:
 
     
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build SportsGoalApp/SportsGoalAppTests/SportsGoalAppTests.csproj --no-restore
 
     
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test SportsGoalApp/SportsGoalAppTests/SportsGoalAppTests.csproj --no-build --verbosity normal
     
