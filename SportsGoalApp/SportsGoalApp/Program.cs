@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SportsGoalApp.Data;
+using SportsGoalApp.Utilities;
 namespace SportsGoalApp
 {
     public class Program
@@ -14,9 +14,11 @@ namespace SportsGoalApp
 
             builder.Services.AddDefaultIdentity<Areas.Identity.Data.SportsGoalAppUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<SportsGoalAppContext>();
-                
+
             // Add services to the container.
             builder.Services.AddRazorPages();
+
+            builder.Services.AddScoped<ICalculatePercentage, PercentageCalculator>();
 
             var app = builder.Build();
 
