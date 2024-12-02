@@ -24,7 +24,7 @@ namespace SportsGoalApp.Pages
         public async Task OnGetAsync()
         {
             SportsGoalAppUser user = await _userManager.GetUserAsync(User);
-            MyGoals = await _context.Goal.Where(u => u.UserId == user.Id).ToListAsync();
+            MyGoals = await _context.Goals.Where(u => u.UserId == user.Id).ToListAsync();
         }
     }
 }

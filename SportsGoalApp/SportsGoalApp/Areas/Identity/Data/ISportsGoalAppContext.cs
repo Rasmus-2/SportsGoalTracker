@@ -5,6 +5,6 @@ namespace SportsGoalApp.Data
 {
     public interface ISportsGoalAppContext
     {
-        DbSet<PracticeLog> PracticeLog { get; }
+        DbSet<PracticeLog> Practices { get; }
     }
 }

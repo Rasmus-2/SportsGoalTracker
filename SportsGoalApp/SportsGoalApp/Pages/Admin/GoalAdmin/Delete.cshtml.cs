@@ -29,7 +29,7 @@ namespace SportsGoalApp.Pages.Admin.GoalAdmin
                 return NotFound();
             }
 
-            var goal = await _context.Goal.FirstOrDefaultAsync(m => m.Id == id);
+            var goal = await _context.Goals.FirstOrDefaultAsync(m => m.Id == id);
 
             if (goal == null)
             {
@@ -49,11 +49,11 @@ namespace SportsGoalApp.Pages.Admin.GoalAdmin
                 return NotFound();
             }
 
-            var goal = await _context.Goal.FindAsync(id);
+            var goal = await _context.Goals.FindAsync(id);
             if (goal != null)
             {
                 Goal = goal;
-                _context.Goal.Remove(Goal);
+                _context.Goals.Remove(Goal);
                 await _context.SaveChangesAsync();
             }
 

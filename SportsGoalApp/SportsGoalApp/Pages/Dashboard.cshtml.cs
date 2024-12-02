@@ -39,12 +39,12 @@ namespace SportsGoalApp.Pages
 
             MyUser = await _userManager.GetUserAsync(User);
 
-            CurrentGoal = await _context.Goal
+            CurrentGoal = await _context.Goals
                 .Where( g => g.StartDate <= DateTime.Now.Date && g.EndDate >= DateTime.Now.Date)
                 .OrderBy( g => g.EndDate)
                 .FirstOrDefaultAsync();
-            GoalList = await _context.Goal.Where(g => g.StartDate >= DateTime.Now).ToListAsync();
-            PracticeLogList = await _context.PracticeLog.ToListAsync();
+            GoalList = await _context.Goals.Where(g => g.StartDate >= DateTime.Now).ToListAsync();
+            PracticeLogList = await _context.Practices.ToListAsync();
 
         }
     }
