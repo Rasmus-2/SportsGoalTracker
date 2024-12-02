@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SportsGoalApp.Models;
 
 namespace SportsGoalApp.Pages
 {
@@ -10,14 +11,23 @@ namespace SportsGoalApp.Pages
         public PracticeLogModel(Data.SportsGoalAppContext context)
         {
             _context = context;
-            PracticeLog = new Models.PracticeLog();
+            PracticeLog = new PracticeLog();
         }
 
         [BindProperty]
-        public Models.PracticeLog PracticeLog { get; set; }
+        public PracticeLog PracticeLog { get; set; }
+        public List<Goal> Goals { get; set; }
 
         public void OnGet()
         {
+            // TODO: change to "_context.Goals.ToList();" when having the context
+
+            Goals = new List<Goal>
+            {
+                new Goal { Id = 1, Title = "Slap shot training" },
+                new Goal { Id = 2, Title = "Passing accuracy training" },
+                new Goal { Id = 3, Title = "Cardio training" }
+            };
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -27,7 +37,7 @@ namespace SportsGoalApp.Pages
                 return Page();
             }
 
-            CalculatePercantage();
+            CalculatePercentage();
 
             _context.PracticeLog.Add(PracticeLog);
             await _context.SaveChangesAsync();
@@ -35,7 +45,7 @@ namespace SportsGoalApp.Pages
             return RedirectToPage("./Index");
         }
 
-        public void CalculatePercantage() {
+        public void CalculatePercentage() {
             
             if (PracticeLog.TotalNumber.HasValue && PracticeLog.SuccessfulNumber.HasValue && PracticeLog.TotalNumber.Value > 0)
             {
