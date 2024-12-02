@@ -4,11 +4,10 @@
     var today = DateTime.Now.ToString("yyyy-MM-dd");
 }
 
-@Model.ErrorMessage
-
+<div class="form-container m-3">
 <h3>Add goal</h3>
 
-<form method="post">
+<form clas="form-group" method="post">
     <label asp-for="NewGoal.Title">Title</label><br />
     <input type="text" asp-for="NewGoal.Title" />
     <br /><br />
@@ -37,3 +36,5 @@
     <input type="submit" class="btn btn-success" value="Create new goal" />
     <br /><br /><br />
 </form>
+
+</div>
