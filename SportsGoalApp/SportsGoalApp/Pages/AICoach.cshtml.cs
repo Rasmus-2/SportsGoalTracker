@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using SportsGoalApp.Models;
 using System.Drawing.Text;
 using System.Text;
 using System.Text.Json;
@@ -9,17 +11,45 @@ namespace SportsGoalApp.Pages
     public class AICoachModel : PageModel
     {
         private readonly HttpClient _httpClient;
+        private readonly Data.SportsGoalAppContext _context;
 
         public string Completion { get; private set; }
 
-        public AICoachModel(HttpClient httpClient)
+        public AICoachModel(HttpClient httpClient, Data.SportsGoalAppContext context)
         {
             _httpClient = httpClient;
+            _context = context;
         }
+
+
+        [BindProperty]
+        public PracticeLog CurrentPracticeLog { get; set; }
+
 
         public async Task OnGetAsync()
         {
-            var payload = new { RawInput = "I practice hockey shots today, but I didn't feel good. I'm not sure I can handle this" };
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            // Query for the current goal
+            CurrentPracticeLog = await _context.Practices
+                .OrderByDescending(l => l.DateTime)
+                .FirstOrDefaultAsync();
+
+
+            string rawInput = "";
+            var payload = new { RawInput = "" };
+
+            if(CurrentPracticeLog != null)
+            {
+                rawInput = CurrentPracticeLog.Notes;
+                payload = new { RawInput = "Give me some uplifting coaching advice with " + rawInput + " as context" };
+            }
+
+            else
+            {
+                payload = new { RawInput = "Give me some uplifting coaching advice" };
+            }
+            
             var jsonPayload = JsonSerializer.Serialize(payload);
             var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 
