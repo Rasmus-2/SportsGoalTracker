@@ -26,6 +26,7 @@
                             <li><a class="dropdown-item" href="/AddGoal">Add Goal</a></li>
                             <li><a class="dropdown-item" href="/AllGoals">View Goals</a></li>
                             <li><a class="dropdown-item" href="/PracticeLog">Log Your Practice</a></li>
+                            <li><a class="dropdown-item" href="/AllPracticeLogs">View Your Log</a></li>
                         </ul>
                     </div>
                     <li class="nav-item">
@@ -49,7 +50,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <div class="card p-3 border bg-light">
+            <div class="card p-3 border" style="background-color: antiquewhite">
                 @if(Model.CurrentGoal != null)
                 {
                 <h4 class="card-title bg-gradient">Current Goal</h4>
@@ -66,7 +67,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="p-3 border bg-light">
+            <div class="p-3 border" style="background-color: antiquewhite">
                 @if(Model.GoalList != null)
                 {
                     foreach(var goal in Model.GoalList)
@@ -86,9 +87,30 @@
     </div>
 
     <div class="row mt-3">
-        <div class="col-md-12">
-            <div class="p-3 border bg-light">
-                <canvas id="myChart" width="400" height="200"></canvas>
+        <div class="col-md-12" style="background-color: antiquewhite">
+            <div class="p-3 border">
+                <!--Upper row-->
+                <div style="height: 100px;">
+                    <div class="row">>
+                    @if(Model.CurrentPracticeLog != null)
+                    {
+                        <h6 class="fw-bold">Latest Log</h6>
+                        <p>Acticity: @Model.CurrentPracticeLog.Activity</p>
+                        <p>Duration: @Model.CurrentPracticeLog.Duration</p>
+                        <p>Notes: @Model.CurrentPracticeLog.Notes</p>
+                    }
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <div class="row mt-2">
+                    <!--Lowe row-->
+                    <div style="height: 200px;">
+                        <canvas id="myChart" style="width: 100%; height: 200px;"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
