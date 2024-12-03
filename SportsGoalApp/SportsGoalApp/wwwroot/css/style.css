@@ -68,7 +68,7 @@
 }
 
 .form-container{
-    max-width: 500px;
+    max-width: 50%;
     margin: 0 auto;
     padding: 20px;
     background-color: antiquewhite;
@@ -80,3 +80,11 @@
     display: flex;
     margin-bottom: 15px;
 }
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Ensures the navbar stays on top of other content */
+    background-color: #fff; /* Optional: Set a background color to ensure it's visible */
+}
+

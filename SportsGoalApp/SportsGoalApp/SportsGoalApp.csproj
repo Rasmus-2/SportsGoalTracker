@@ -19,13 +19,4 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="API\" />
-    <Folder Include="Pages\Admin\PracticeLogAdmin\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\OpenAIApi\OpenAIApi.csproj" />
-  </ItemGroup>
-
 </Project>

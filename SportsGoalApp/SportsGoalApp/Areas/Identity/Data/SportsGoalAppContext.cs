@@ -5,7 +5,7 @@ using SportsGoalApp.Areas.Identity.Data;
 
 namespace SportsGoalApp.Data;
 
-public class SportsGoalAppContext : IdentityDbContext<SportsGoalAppUser>
+public class SportsGoalAppContext : IdentityDbContext<SportsGoalAppUser>, ISportsGoalAppContext
 {
     public SportsGoalAppContext(DbContextOptions<SportsGoalAppContext> options)
         : base(options)

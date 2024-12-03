@@ -1,0 +1,78 @@
+﻿@page
+@model SportsGoalApp.Pages.Admin.PracticeLogAdmin.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PracticeLog[0].GoalId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PracticeLog[0].DateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PracticeLog[0].Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PracticeLog[0].Activity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PracticeLog[0].Notes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PracticeLog[0].TotalNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PracticeLog[0].SuccessfulNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PracticeLog[0].Percentage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.PracticeLog) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GoalId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SuccessfulNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Percentage)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

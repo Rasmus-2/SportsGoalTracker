@@ -1,4 +1,40 @@
-﻿@page
+@page
 @model SportsGoalApp.Pages.AllPracticeLogsModel
 @{
+    ViewData["Title"] = "All practice logs";
+}
+
+<h3>All practice logs</h3>
+
+@if(Model.MyPracticeLogs != null && Model.MyPracticeLogs.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Duration</th>
+                <th></th>
+                <th>Activity</th>
+                <th>Notes</th>
+                <th>Total number</th>
+                <th>Successful number</th>
+                <th>Percentage</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var log in Model.MyPracticeLogs)
+            {
+                <tr>
+                    <td>@log.DateTime.ToString("g")</td>
+                    <td>@log.Duration</td>
+                    <td>@log.DurationUnit</td>
+                    <td>@log.Activity</td>
+                    <td>@log.Notes</td>
+                    <td>@log.TotalNumber</td>
+                    <td>@log.SuccessfulNumber</td>
+                    <td>@log.Percentage</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SportsGoalApp.Areas.Identity.Data;
+using SportsGoalApp.Enums;
+using SportsGoalApp.Models;
 
 namespace SportsGoalApp.Pages
 {
@@ -22,21 +24,39 @@ namespace SportsGoalApp.Pages
         [BindProperty]
         public Models.Goal NewGoal { get; set; }
 
+        public string ErrorMessage { get; set; }
 
-        public async Task OnGetAsync()
+        [BindProperty]
+        public List<string> MyCategories { get; set; }
+
+        public async Task OnGetAsync(bool dateError)
         {
+            if (dateError)
+            {
+                ErrorMessage = "You already have a goal during some of those dates, you can only have one goal at a time";
+            }
+            else
+            {
+                ErrorMessage = "";
+            }
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
+            bool forbiddenDate = false;
             SportsGoalAppUser user = await _userManager.GetUserAsync(User);
             NewGoal.UserId = user.Id;
-            NewGoal.Category = 1;
 
             _context.Goals.Add(NewGoal);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage();
+            if (!forbiddenDate)
+            {
+                _context.Goals.Add(NewGoal);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToPage("./AddGoal", "OnGetAsync", new { dateError = forbiddenDate });
         }
     }
 }

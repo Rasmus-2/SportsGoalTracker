@@ -1,0 +1,67 @@
+﻿@page
+@model SportsGoalApp.Pages.Admin.PracticeLogAdmin.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>PracticeLog</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PracticeLog.GoalId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PracticeLog.GoalId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PracticeLog.DateTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PracticeLog.DateTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PracticeLog.Duration)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PracticeLog.Duration)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PracticeLog.Activity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PracticeLog.Activity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PracticeLog.Notes)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PracticeLog.Notes)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PracticeLog.TotalNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PracticeLog.TotalNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PracticeLog.SuccessfulNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PracticeLog.SuccessfulNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PracticeLog.Percentage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PracticeLog.Percentage)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.PracticeLog.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
