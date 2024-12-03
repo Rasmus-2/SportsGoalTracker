@@ -34,7 +34,7 @@ namespace SportsGoalAppTests
             mockDbSet.As<IQueryable<PracticeLog>>().Setup(m => m.ElementType).Returns(mockPracticeLog.ElementType);
             mockDbSet.As<IQueryable<PracticeLog>>().Setup(m => m.GetEnumerator()).Returns(mockPracticeLog.GetEnumerator());
 
-            mockContext.Setup(c => c.PracticeLog).Returns(mockDbSet.Object);
+            mockContext.Setup(c => c.Practices).Returns(mockDbSet.Object);
 
             var controller = new ChartController(mockContext.Object);
 

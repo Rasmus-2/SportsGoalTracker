@@ -5,6 +5,8 @@
 
 <head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/js/createChart.js"></script>
+    <script src="~/js/fetchChart.js"></script>
 </head>
 
 @section Navbar{
@@ -52,7 +54,7 @@
                 {
                 <h4 class="card-title bg-gradient">Current Goal</h4>
                 <h5 class="card-body">@Model.CurrentGoal.Title</h5>
-                <h6>Period: @Model.CurrentGoal.StartDate.Date - @Model.CurrentGoal.EndDate.Date</h6>
+                <h6>Period: @Model.CurrentGoal.StartDate- @Model.CurrentGoal.EndDate</h6>
                 <h6>Target: @Model.CurrentGoal.GoalNumber</h6>
                     <p>@Model.CurrentGoal.Description</p>
                 }

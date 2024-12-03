@@ -22,7 +22,7 @@ namespace SportsGoalApp.Controllers
         public IActionResult GetChartData()
         {
             //Fetch Percentage data directly from the PracticeLog table
-            var data = _context.PracticeLog
+            var data = _context.Practices
                 .Select(pl => pl.Percentage)
                 .ToList();
 
