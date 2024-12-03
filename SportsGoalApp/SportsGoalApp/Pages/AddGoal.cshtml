@@ -22,11 +22,11 @@
     <br /><br />
 
     <label asp-for="NewGoal.StartDate">Start date</label><br />
-    <input asp-for="NewGoal.StartDate" type="date" />
+    <input asp-for="NewGoal.StartDate" type = "date" value="@today"/>
     <br /><br />
 
     <label asp-for="NewGoal.EndDate">End date</label><br />
-    <input asp-for="NewGoal.EndDate" type="date" />
+    <input asp-for="NewGoal.EndDate" type="date" value="@today" />
     <br /><br />
 
     <label asp-for="NewGoal.GoalNumber"></label><br />

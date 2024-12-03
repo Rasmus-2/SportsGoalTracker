@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SportsGoalApp.Data;
 
@@ -11,9 +12,11 @@ using SportsGoalApp.Data;
 namespace SportsGoalApp.Migrations
 {
     [DbContext(typeof(SportsGoalAppContext))]
-    partial class SportsGoalAppContextModelSnapshot : ModelSnapshot
+    [Migration("20241201023508_addedUserIdPracticelog")]
+    partial class addedUserIdPracticelog
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,20 +247,20 @@ namespace SportsGoalApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Category")
+                    b.Property<int?>("Category")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("EndDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("GoalNumber")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("StartDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -287,10 +290,6 @@ namespace SportsGoalApp.Migrations
 
                     b.Property<int?>("Duration")
                         .HasColumnType("int");
-
-                    b.Property<string>("DurationUnit")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("GoalId")
                         .HasColumnType("int");

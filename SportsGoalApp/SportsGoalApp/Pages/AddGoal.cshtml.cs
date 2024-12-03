@@ -47,18 +47,8 @@ namespace SportsGoalApp.Pages
             SportsGoalAppUser user = await _userManager.GetUserAsync(User);
             NewGoal.UserId = user.Id;
 
-            var myGoals = await _context.Goals.Where(g => g.UserId == user.Id).ToListAsync();
-            if (myGoals != null)
-            {
-                foreach (var goal in myGoals)
-                {
-                    if (NewGoal.StartDate <= goal.EndDate && NewGoal.EndDate >= goal.StartDate)
-                    {
-                        forbiddenDate = true;
-                        break;
-                    }
-                }
-            }
+            _context.Goal.Add(NewGoal);
+            await _context.SaveChangesAsync();
 
             if (!forbiddenDate)
             {
