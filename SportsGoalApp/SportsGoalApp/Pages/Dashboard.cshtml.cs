@@ -25,7 +25,7 @@ namespace SportsGoalApp.Pages
         public List<Models.Goal> GoalList { get; set; }
         
         [BindProperty]
-        public Models.PracticeLog PracticeLog { get; set; }
+        public PracticeLog CurrentPracticeLog { get; set; }
         public List<Models.PracticeLog> PracticeLogList { get; set; }
 
 
@@ -52,8 +52,11 @@ namespace SportsGoalApp.Pages
                 .Where(g => g.StartDate >= today)
                 .ToListAsync();
 
-            // Query for the practice log list
-            PracticeLogList = await _context.Practices.ToListAsync();
+            // Query for the current practice log
+            CurrentPracticeLog = await _context.Practices
+                .OrderByDescending(l => l.DateTime)
+                .FirstOrDefaultAsync();
+
 
 
         }
