@@ -71,7 +71,7 @@ namespace SportsGoalApp.Pages
             _context.Practices.Add(newPracticeLog);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Dashboard");
         }
 
         public void CalculatePercentage()

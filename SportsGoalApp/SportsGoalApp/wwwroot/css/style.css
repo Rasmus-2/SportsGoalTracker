@@ -67,17 +67,21 @@
     background-color: #32CD32;
 }
 
-.form-container{
-    max-width: 50%;
+.form-container {
+    display: flex;
+    justify-content: center; /* centers horizontally */
+    align-items: center; /* centers vertically */
+    flex-direction: column;
+    width: auto;
     margin: 0 auto;
-    padding: 20px;
-    background-color: antiquewhite;
+    padding: 10px;
+    background-color: /*#953553*/ antiquewhite;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
 
 .form-group{
-    display: flex;
+    display: inline-block;
     margin-bottom: 15px;
 }
 

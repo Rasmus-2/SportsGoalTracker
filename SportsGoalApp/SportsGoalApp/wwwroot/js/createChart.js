@@ -3,13 +3,13 @@
     const myChart = new Chart(ctx, {
         type: 'line', 
         data: {
-            labels: data.map((_, index) => `Entry ${index + 1}`), // Create labels for each data point
+            labels: data.map((_, index) => `Day ${index + 1}`), // Create labels for each data point
             datasets: [{
-                label: 'Practice Percentage',
+                label: 'Practice Log Statistic in %',
                 data: data,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
+                backgroundColor: 'rgba(0, 128, 0, 0.2)', // Green with 20% opacity
+                borderColor: 'rgba(0, 128, 0, 1)',      // Solid green
+                borderWidth: 4
             }]
         },
         options: {
