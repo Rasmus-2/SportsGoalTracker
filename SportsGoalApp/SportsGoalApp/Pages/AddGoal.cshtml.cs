@@ -47,7 +47,7 @@ namespace SportsGoalApp.Pages
             SportsGoalAppUser user = await _userManager.GetUserAsync(User);
             NewGoal.UserId = user.Id;
 
-            _context.Goal.Add(NewGoal);
+            _context.Goals.Add(NewGoal);
             await _context.SaveChangesAsync();
 
             if (!forbiddenDate)

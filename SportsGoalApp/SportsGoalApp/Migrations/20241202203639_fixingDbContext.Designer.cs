@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SportsGoalApp.Data;
 
@@ -11,9 +12,11 @@ using SportsGoalApp.Data;
 namespace SportsGoalApp.Migrations
 {
     [DbContext(typeof(SportsGoalAppContext))]
-    partial class SportsGoalAppContextModelSnapshot : ModelSnapshot
+    [Migration("20241202203639_fixingDbContext")]
+    partial class fixingDbContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -288,9 +291,6 @@ namespace SportsGoalApp.Migrations
                     b.Property<int?>("Duration")
                         .HasColumnType("int");
 
-                    b.Property<string>("DurationUnit")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("GoalId")
                         .HasColumnType("int");
 
@@ -305,10 +305,6 @@ namespace SportsGoalApp.Migrations
 
                     b.Property<int?>("TotalNumber")
                         .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

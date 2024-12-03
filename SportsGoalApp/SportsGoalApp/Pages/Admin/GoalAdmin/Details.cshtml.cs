@@ -28,7 +28,7 @@ namespace SportsGoalApp.Pages.Admin.GoalAdmin
                 return NotFound();
             }
 
-            var goal = await _context.Goal.FirstOrDefaultAsync(m => m.Id == id);
+            var goal = await _context.Goals.FirstOrDefaultAsync(m => m.Id == id);
             if (goal == null)
             {
                 return NotFound();

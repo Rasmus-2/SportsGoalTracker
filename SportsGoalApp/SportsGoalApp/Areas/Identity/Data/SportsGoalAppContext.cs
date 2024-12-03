@@ -20,6 +20,6 @@ public class SportsGoalAppContext : IdentityDbContext<SportsGoalAppUser>, ISport
         // Add your customizations after calling base.OnModelCreating(builder);
     }
 
-    public DbSet<Models.Goal> Goal { get; set; } 
-    public DbSet<Models.PracticeLog> PracticeLog { get; set; }
+    public DbSet<Models.Goal> Goals { get; set; } 
+    public DbSet<Models.PracticeLog> Practices { get; set; }
 }

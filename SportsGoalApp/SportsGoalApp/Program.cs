@@ -37,6 +37,7 @@ namespace SportsGoalApp
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.MapControllers();
             app.MapRazorPages();
 
             app.Run();
