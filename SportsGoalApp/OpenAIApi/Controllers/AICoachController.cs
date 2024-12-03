@@ -5,12 +5,12 @@ namespace OpenAIApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class GrammarFixerController : ControllerBase
+    public class AICoachController : ControllerBase
     {
-        private readonly ILogger<GrammarFixerController> _logger;
+        private readonly ILogger<AICoachController> _logger;
         private IConfiguration _configuration;
 
-        public GrammarFixerController(ILogger<GrammarFixerController> logger, IConfiguration configuration)
+        public AICoachController(ILogger<AICoachController> logger, IConfiguration configuration)
         {
             _logger = logger;
             _configuration = configuration;
@@ -22,8 +22,8 @@ namespace OpenAIApi.Controllers
             return _configuration["VERSION"];
         }
 
-        [HttpPost("fixGrammar")]
-        public async Task<IActionResult> FixGrammar([FromBody] SentencePayloadRequest request)
+        [HttpPost("coachingAdvice")]
+        public async Task<IActionResult> GetCoachingAdvice([FromBody] SentencePayloadRequest request)
         {
             var openAiKey = _configuration["open-api-key"];
 
@@ -34,14 +34,14 @@ namespace OpenAIApi.Controllers
 
             var openai = new ChatGpt(openAiKey);
 
-            var fixedSentence = await openai.Ask($"Give coaching advice: { request.RawSentence} ");
+            var coahingAdvice = await openai.Ask($"Give coaching advice: { request.RawInput} ");
 
-            if(fixedSentence == null)
+            if(coahingAdvice == null)
             {
-                return NotFound("Error fixing sentence");
+                return NotFound("Error giving coaching advice");
             }
 
-            return Ok(new SentencePayloadResponse() { fixedSentence = fixedSentence});
+            return Ok(new SentencePayloadResponse() { CoachingAdvice = coahingAdvice});
         }
     }
 }

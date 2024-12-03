@@ -13,6 +13,7 @@ namespace OpenAIApi
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddHealthChecks();
 
             var app = builder.Build();
 
@@ -27,7 +28,8 @@ namespace OpenAIApi
 
             app.UseAuthorization();
 
-
+            app.MapHealthChecks("/health");
+            
             app.MapControllers();
 
             app.Run();

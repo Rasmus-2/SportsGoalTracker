@@ -19,11 +19,11 @@ namespace SportsGoalApp.Pages
 
         public async Task OnGetAsync()
         {
-            var payload = new { RawSentence = "I practice hockey shots today, but I didn't feel good. I'm not sure I can handle this" };
+            var payload = new { RawInput = "I practice hockey shots today, but I didn't feel good. I'm not sure I can handle this" };
             var jsonPayload = JsonSerializer.Serialize(payload);
             var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("https://localhost:44334/grammarfixer/fixGrammar", content);
+            var response = await _httpClient.PostAsync("https://localhost:44334/AICoach/coachingAdvice", content);
 
             if(response.IsSuccessStatusCode)
             {
@@ -33,7 +33,7 @@ namespace SportsGoalApp.Pages
                     PropertyNameCaseInsensitive = true
                 });
 
-                Completion = responseJson?.FixedSentence ?? "No response from the API";
+                Completion = responseJson?.CoachingAdvice ?? "No response from the API";
 
             }
             else
@@ -44,7 +44,7 @@ namespace SportsGoalApp.Pages
 
         private class SentencePayloadResponse
         {
-            public string FixedSentence { get; set; }
+            public string CoachingAdvice { get; set; }
         }
         
     }

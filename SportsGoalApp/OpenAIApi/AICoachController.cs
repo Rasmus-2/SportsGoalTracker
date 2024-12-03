@@ -2,11 +2,11 @@ namespace OpenAIApi
 {
     public class SentencePayloadResponse
     {
-        public string fixedSentence { get; set; }
+        public string CoachingAdvice { get; set; }
     }
     
     public class SentencePayloadRequest
     {
-        public string RawSentence { get; set; }
+        public string RawInput { get; set; }
     }
 }
