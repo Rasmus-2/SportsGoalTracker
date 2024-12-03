@@ -30,7 +30,7 @@ namespace SportsGoalApp.Pages.Admin.GoalAdmin
                 return NotFound();
             }
 
-            var goal =  await _context.Goals.FirstOrDefaultAsync(m => m.Id == id);
+            var goal =  await _context.Goal.FirstOrDefaultAsync(m => m.Id == id);
             if (goal == null)
             {
                 return NotFound();
@@ -71,7 +71,7 @@ namespace SportsGoalApp.Pages.Admin.GoalAdmin
 
         private bool GoalExists(int id)
         {
-            return _context.Goals.Any(e => e.Id == id);
+            return _context.Goal.Any(e => e.Id == id);
         }
     }
 }

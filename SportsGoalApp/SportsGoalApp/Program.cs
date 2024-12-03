@@ -11,6 +11,7 @@ namespace SportsGoalApp
             var connectionString = builder.Configuration.GetConnectionString("SportsGoalAppContextConnection") ?? throw new InvalidOperationException("Connection string 'SportsGoalAppContextConnection' not found.");
 
             builder.Services.AddDbContext<SportsGoalAppContext>(options => options.UseSqlServer(connectionString));
+            builder.Services.AddScoped<ISportsGoalAppContext, SportsGoalAppContext>();
 
             builder.Services.AddDefaultIdentity<Areas.Identity.Data.SportsGoalAppUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<SportsGoalAppContext>();

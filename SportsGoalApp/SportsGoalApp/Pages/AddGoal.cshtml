@@ -1,13 +1,13 @@
 ﻿@page
 @model SportsGoalApp.Pages.AddGoalModel
 @{
+    var today = DateTime.Now.ToString("yyyy-MM-dd");
 }
 
-@Model.ErrorMessage
-
+<div class="form-container m-3">
 <h3>Add goal</h3>
 
-<form method="post">
+<form clas="form-group" method="post">
     <label asp-for="NewGoal.Title">Title</label><br />
     <input type="text" asp-for="NewGoal.Title" />
     <br /><br />
@@ -22,11 +22,11 @@
     <br /><br />
 
     <label asp-for="NewGoal.StartDate">Start date</label><br />
-    <input asp-for="NewGoal.StartDate" type="date" />
+    <input asp-for="NewGoal.StartDate" type = "date" value="@today"/>
     <br /><br />
 
     <label asp-for="NewGoal.EndDate">End date</label><br />
-    <input asp-for="NewGoal.EndDate" type="date" />
+    <input asp-for="NewGoal.EndDate" type="date" value="@today" />
     <br /><br />
 
     <label asp-for="NewGoal.GoalNumber"></label><br />
@@ -36,3 +36,5 @@
     <input type="submit" class="btn btn-success" value="Create new goal" />
     <br /><br /><br />
 </form>
+
+</div>
