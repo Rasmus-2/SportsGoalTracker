@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SportsGoalApp.Models;
-using System.Drawing.Text;
 using System.Text;
 using System.Text.Json;
 
@@ -25,37 +24,48 @@ namespace SportsGoalApp.Pages
         [BindProperty]
         public PracticeLog CurrentPracticeLog { get; set; }
 
+        [BindProperty]
+        public Goal CurrentGoal { get; set; }
+
 
         public async Task OnGetAsync()
         {
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
 
             // Query for the current goal
+            CurrentGoal = await _context.Goals
+                .Where(g => g.StartDate <= today && g.EndDate >= today)
+                .OrderBy(g => g.EndDate)
+                .FirstOrDefaultAsync();
+
+            // Latest Practicelog    
             CurrentPracticeLog = await _context.Practices
                 .OrderByDescending(l => l.DateTime)
                 .FirstOrDefaultAsync();
 
 
-            string rawInput = "";
+            string rawInputNotes = "";
+            string rawInputGoal = "";
             var payload = new { RawInput = "" };
 
-            if(CurrentPracticeLog != null)
+            if (CurrentPracticeLog != null && CurrentGoal != null)
             {
-                rawInput = CurrentPracticeLog.Notes;
-                payload = new { RawInput = "Give me some uplifting coaching advice with " + rawInput + " as context" };
+                rawInputNotes = CurrentPracticeLog.Notes;
+                rawInputGoal = CurrentGoal.Description;
+                payload = new { RawInput = "Give me some uplifting coaching advice for" + rawInputGoal + " with " + rawInputNotes + " as context" };
             }
 
             else
             {
                 payload = new { RawInput = "Give me some uplifting coaching advice" };
             }
-            
+
             var jsonPayload = JsonSerializer.Serialize(payload);
             var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("https://localhost:44334/AICoach/coachingAdvice", content);
+            var response = await _httpClient.PostAsync("https://localhost:7138/AICoach/coachingAdvice", content);
 
-            if(response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
                 var responseString = await response.Content.ReadAsStringAsync();
                 var responseJson = JsonSerializer.Deserialize<SentencePayloadResponse>(responseString, new JsonSerializerOptions
@@ -76,6 +86,6 @@ namespace SportsGoalApp.Pages
         {
             public string CoachingAdvice { get; set; }
         }
-        
+
     }
 }
