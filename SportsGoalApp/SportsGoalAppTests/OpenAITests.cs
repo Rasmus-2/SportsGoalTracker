@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
 using OpenAIApi;
-using OpenAIAPITests.Mock;
+using SportsGoalAppTests.Mock;
 using System;
 using System.Collections.Generic;
 using System.Linq;
