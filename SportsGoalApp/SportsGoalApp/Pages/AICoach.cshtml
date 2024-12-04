@@ -1,0 +1,16 @@
+﻿@page
+@model SportsGoalApp.Pages.AICoachModel
+@{
+    ViewData["Title"] = "AI Coach";
+}
+
+<h3>AI Coach</h3>
+
+@if (!string.IsNullOrEmpty(Model.Completion))
+{
+    <blockquote>@Model.Completion</blockquote>
+}
+else
+{
+    <p>Loading response...</p>
+}
