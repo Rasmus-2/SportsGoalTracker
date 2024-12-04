@@ -1,22 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
 using OpenAIApi;
+using OpenAIAPITests.Mock;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SportsGoalAppTests
 {
-    public class OpenAITests : IClassFixture<WebApplicationFactory<OpenAIApi.Program>>
+    public class OpenAITests : IClassFixture<CustomWebApplicationFactory<OpenAIApi.Program>>
     {
         private readonly HttpClient _httpClient;
+        private readonly CustomWebApplicationFactory<Program> _factory;
 
-        public OpenAITests(WebApplicationFactory<OpenAIApi.Program> factory)
+        public OpenAITests(CustomWebApplicationFactory<OpenAIApi.Program> factory)
         {
-            _httpClient = factory.CreateClient();
-
+            _factory = factory;
+            _httpClient = factory.CreateClient(new WebApplicationFactoryClientOptions
+            {
+                AllowAutoRedirect = false
+            });
+            
         }
 
         [Fact]
@@ -51,6 +58,8 @@ namespace SportsGoalAppTests
             response.EnsureSuccessStatusCode(); // Status Code 200-299
             Assert.NotNull(responseContent);
             Assert.False(string.IsNullOrEmpty(responseContent.CoachingAdvice));
+            // Check the response content
+            Assert.Equal("Keep practicing your shooting technique.", responseContent.CoachingAdvice);
         }
     }
 }
