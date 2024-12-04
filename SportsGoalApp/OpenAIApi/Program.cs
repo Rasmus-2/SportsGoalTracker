@@ -1,4 +1,9 @@
 
+using ChatGPT.Net;
+using Microsoft.Extensions.Options;
+using OpenAIApi.Options;
+using OpenAIApi.Wrappers;
+
 namespace OpenAIApi
 {
     public class Program
@@ -14,6 +19,13 @@ namespace OpenAIApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddHealthChecks();
+
+            builder.Services.Configure<ChatGptSettings>(builder.Configuration.GetSection("ChatGpt"));
+            builder.Services.AddSingleton<ChatGpt>(provider => {
+                var settings = provider.GetRequiredService<IOptions<ChatGptSettings>>().Value;
+                return new ChatGpt(settings.ApiKey);
+                });
+            builder.Services.AddScoped<IChatGpt, ChatGptWrapper>();
 
             var app = builder.Build();
 

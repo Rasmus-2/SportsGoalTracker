@@ -16,6 +16,7 @@ namespace SportsGoalAppTests
         public OpenAITests(WebApplicationFactory<OpenAIApi.Program> factory)
         {
             _httpClient = factory.CreateClient();
+
         }
 
         [Fact]

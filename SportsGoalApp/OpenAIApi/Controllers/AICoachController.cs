@@ -1,5 +1,8 @@
 using ChatGPT.Net;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using OpenAIApi.Options;
+using OpenAIApi.Wrappers;
 
 namespace OpenAIApi.Controllers
 {
@@ -8,12 +11,16 @@ namespace OpenAIApi.Controllers
     public class AICoachController : ControllerBase
     {
         private readonly ILogger<AICoachController> _logger;
+        private readonly IChatGpt _openai;
+        private readonly ChatGptSettings _options;
         private IConfiguration _configuration;
 
-        public AICoachController(ILogger<AICoachController> logger, IConfiguration configuration)
+        public AICoachController(ILogger<AICoachController> logger, IConfiguration configuration, IChatGpt openai, IOptions<ChatGptSettings> options)
         {
             _logger = logger;
             _configuration = configuration;
+            _openai = openai;
+            _options = options.Value;
         }
 
         [HttpGet("version")]
@@ -25,23 +32,21 @@ namespace OpenAIApi.Controllers
         [HttpPost("coachingAdvice")]
         public async Task<IActionResult> GetCoachingAdvice([FromBody] SentencePayloadRequest request)
         {
-            var openAiKey = _configuration["open-api-key"];
 
-            if(openAiKey == null)
+            if(string.IsNullOrEmpty(_options.ApiKey))
             {
                 return NotFound("OpenAiKey is not set");
             }
 
-            var openai = new ChatGpt(openAiKey);
 
-            var coahingAdvice = await openai.Ask($"Give coaching advice: { request.RawInput} ");
+            var coachingAdvice = await _openai.Ask($"Give coaching advice: { request.RawInput} ");
 
-            if(coahingAdvice == null)
+            if(coachingAdvice == null)
             {
                 return NotFound("Error giving coaching advice");
             }
 
-            return Ok(new SentencePayloadResponse() { CoachingAdvice = coahingAdvice});
+            return Ok(new SentencePayloadResponse() { CoachingAdvice = coachingAdvice});
         }
     }
 }
