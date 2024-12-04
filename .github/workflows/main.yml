@@ -32,5 +32,7 @@ jobs:
 
     
     - name: Test
+      env:
+        OPEN_AI_KEY: ${{ secrets.API_KEY }}
       run: dotnet test SportsGoalApp/SportsGoalAppTests/SportsGoalAppTests.csproj --no-build --verbosity normal
     
