@@ -5,6 +5,7 @@
 
 <head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/lib/chart.js-4.4.7"></script>
     <script src="~/js/createChart.js"></script>
     <script src="~/js/fetchChart.js"></script>
 </head>
@@ -96,7 +97,7 @@
                     {
                         <h6 class="fw-bold">Latest Log</h6>
                         <p>Acticity: @Model.CurrentPracticeLog.Activity</p>
-                        <p>Duration: @Model.CurrentPracticeLog.Duration</p>
+                        <p>Duration: @Model.CurrentPracticeLog.Duration @Model.CurrentPracticeLog.DurationUnit</p>
                         <p>Notes: @Model.CurrentPracticeLog.Notes</p>
                     }
                     </div>
