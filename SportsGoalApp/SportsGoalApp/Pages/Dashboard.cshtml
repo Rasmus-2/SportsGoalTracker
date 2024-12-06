@@ -5,6 +5,7 @@
 
 <head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/lib/chart.js-4.4.7"></script>
     <script src="~/js/createChart.js"></script>
     <script src="~/js/fetchChart.js"></script>
 </head>
@@ -20,8 +21,8 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1 justify-content-end">
                     <partial name="_LoginPartial" />
-                    <div class="dropdown">
-                        <a class="btn btn-secondary bg-white text-black dropdown-toggle border-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
+                    <div class="nav-link dropdown">
+                        <a class="@* btn btn-secondary *@  bg-white text-black dropdown-toggle border-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/AddGoal">Add Goal</a></li>
                             <li><a class="dropdown-item" href="/AllGoals">View Goals</a></li>
@@ -91,12 +92,12 @@
             <div class="p-3 border">
                 <!--Upper row-->
                 <div style="height: 100px;">
-                    <div class="row">>
+                    <div class="row">
                     @if(Model.CurrentPracticeLog != null)
                     {
                         <h6 class="fw-bold">Latest Log</h6>
                         <p>Acticity: @Model.CurrentPracticeLog.Activity</p>
-                        <p>Duration: @Model.CurrentPracticeLog.Duration</p>
+                        <p>Duration: @Model.CurrentPracticeLog.Duration @Model.CurrentPracticeLog.DurationUnit</p>
                         <p>Notes: @Model.CurrentPracticeLog.Notes</p>
                     }
                     </div>

@@ -2,7 +2,7 @@
 @model SportsGoalApp.Pages.SelectedGoalModel
 @{
 }
-
+<div class="form-container m-3">
 <div class="row">
     <div class="col-5">
         <h2>@Model.SelectedGoal.Title</h2>
@@ -25,4 +25,5 @@
         }
     </div>
 </div>
-
+</div>
+<a class="button text-light" id="dashboard" asp-page="/Dashboard">Back to dashboard</a>
