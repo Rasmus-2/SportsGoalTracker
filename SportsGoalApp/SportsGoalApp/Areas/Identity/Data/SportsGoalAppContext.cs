@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SportsGoalApp.Areas.Identity.Data;
 
@@ -20,6 +19,7 @@ public class SportsGoalAppContext : IdentityDbContext<SportsGoalAppUser>, ISport
         // Add your customizations after calling base.OnModelCreating(builder);
     }
 
-    public DbSet<Models.Goal> Goals { get; set; } 
+    public DbSet<Models.Goal> Goals { get; set; }
     public DbSet<Models.PracticeLog> Practices { get; set; }
+    public DbSet<Models.CoachingAdvices> CoachingAdvices { get; set; }
 }
