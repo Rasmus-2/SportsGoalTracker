@@ -10,34 +10,6 @@
     <script src="~/js/fetchChart.js"></script>
 </head>
 
-@section Navbar{
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
-        <div class="container">
-            <a class="navbar-brand" asp-area="" asp-page="/Index">SportsGoalApp</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1 justify-content-end">
-                    <partial name="_LoginPartial" />
-                    <div class="nav-link dropdown">
-                        <a class="@* btn btn-secondary *@  bg-white text-black dropdown-toggle border-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/AddGoal">Add Goal</a></li>
-                            <li><a class="dropdown-item" href="/AllGoals">View Goals</a></li>
-                            <li><a class="dropdown-item" href="/PracticeLog">Log Your Practice</a></li>
-                            <li><a class="dropdown-item" href="/AllPracticeLogs">View Your Log</a></li>
-                        </ul>
-                    </div>
-                    <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-page="/AICoach">AI Coach</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-}
 
 <div class="container">
     <h1 class="display-6">Dashboard</h1>

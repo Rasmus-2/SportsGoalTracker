@@ -7,16 +7,32 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
+
         var user = await UserManager.GetUserAsync(User);
-     <li class="nav-item d-inline-block">
-        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @user.Forename!</a>
+     <li class="nav-item dropdown">
+            <a class="nav-link text-dark btn dropdown-toggle bg-white border-0" asp-area="Identity" asp-page="/Account/Manage/Index" id="userDropdown" title="Manage" role="button" data-bs-toggle="dropdown" aria-expanded="false">Hello @user.Forename!</a>
+            <ul class="dropdown-menu">
+                <li class="dropdown-item" aria-labelledby="userDropdown">
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                        <button id="logout" type="submit" class="nav-link btn-link text-dark border-0">Logout</button>
+                        @* <button type="submit" class="nav-link btn btn-link text-light">Logout</button> *@
+                    </form>
+                </li>
+            </ul>
     </li>
-    <li class="nav-item d-inline-block">
-        <form id="logoutForm" class="form-inline d-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-            <button id="logout" type="submit" class="nav-link btn-link text-dark border-0">Logout</button>
-        </form>
-            @* <a class="nav-link text-dark" id="logout" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">Logout</a> *@
+    <li class="nav-item dropdown">
+            <a class="nav-link text-dark btn dropdown-toggle bg-white border-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/AddGoal">Add Goal</a></li>
+                <li><a class="dropdown-item" href="/AllGoals">View Goals</a></li>
+                <li><a class="dropdown-item" href="/PracticeLog">Log Your Practice</a></li>
+                <li><a class="dropdown-item" href="/AllPracticeLogs">View Your Log</a></li>
+            </ul>
     </li>
+    <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/AICoach">AI Coach</a>
+    </li>
+    
 }
 else
 {
