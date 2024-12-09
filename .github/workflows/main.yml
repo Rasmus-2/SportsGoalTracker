@@ -12,6 +12,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment: test
+
+    services:
+      sqlserver:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        env:
+          SA_PASSWORD: "Abc@123"
+          ACCEPT_EULA: "A"
+        ports:
+          - 1433:1433
+        options: >-
+          --health-cmd "exit 0"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -34,5 +48,6 @@ jobs:
     - name: Test
       env:
         ChatGpt__ApiKey: ${{ secrets.API_KEY }}
-      run: dotnet test SportsGoalApp/SportsGoalAppTests/SportsGoalAppTests.csproj --no-build --verbosity normal
+        ConnectionStrings: Server=.\\SQLEXPRESS;Database=SportsGoalApp;Trusted_Connection=True; Encrypt=false
+      run: dotnet test SportsGoalApp/SportsGoalAppTests/SportsGoalAppTests.csproj 
     
