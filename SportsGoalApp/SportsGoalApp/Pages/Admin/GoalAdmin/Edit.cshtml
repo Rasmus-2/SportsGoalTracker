@@ -50,6 +50,11 @@
                 <span asp-validation-for="Goal.GoalNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Goal.Success" class="control-label"></label>
+                <input asp-for="Goal.Success" class="form-control" />
+                <span asp-validation-for="Goal.Success" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
