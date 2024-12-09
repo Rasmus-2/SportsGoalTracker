@@ -48,6 +48,7 @@ jobs:
     - name: Test
       env:
         ChatGpt__ApiKey: ${{ secrets.API_KEY }}
-        ConnectionStrings: Server=.\\SQLEXPRESS;Database=SportsGoalApp;Trusted_Connection=True; Encrypt=false
-      run: dotnet test SportsGoalApp/SportsGoalAppTests/SportsGoalAppTests.csproj 
-    
+
+        ConnectionStrings__DefaultConnection: "Server=.\\SQLEXPRESS;Database=SportsGoalApp;Trusted_Connection=True; Encrypt=false"
+      run: dotnet test SportsGoalApp/SportsGoalAppTests/SportsGoalAppTests.csproj --no-build --verbosity normal   
+
