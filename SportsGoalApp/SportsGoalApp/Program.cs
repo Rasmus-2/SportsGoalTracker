@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using SportsGoalApp.Areas.Identity.Data;
 using SportsGoalApp.Data;
 namespace SportsGoalApp
 {
