@@ -2,10 +2,11 @@
 {
     public enum GoalCategories
     {
-        Stamina,
-        Strength,
-        Shooting,
-        Passing,
-        Speed
+        Skill_improvement,
+        Fitness,
+        Game_sense,
+        Mental_training,
+        Nutrition_and_Diet,
+        Competition_preperation
     }
 }
