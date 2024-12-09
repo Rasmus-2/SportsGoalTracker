@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ using System.Text.Json;
 
 namespace SportsGoalApp.Pages
 {
+    [Authorize]
     public class AICoachModel : PageModel
     {
         private readonly HttpClient _httpClient;
