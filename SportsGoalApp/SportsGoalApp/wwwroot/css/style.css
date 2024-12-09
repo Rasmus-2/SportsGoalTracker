@@ -74,7 +74,7 @@
     flex-direction: column;
     width: auto;
     margin: 0 auto;
-    padding: 10px;
+    padding: 30px;
     background-color: /*#953553*/ antiquewhite;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.4);
@@ -92,3 +92,20 @@
     background-color: #fff; /* Optional: Set a background color to ensure it's visible */
 }
 
+.tabbed-text {
+    /* This will create a tab-like indentation */
+    padding-left: 2em;
+}
+
+.form-container-custom {
+    display: flex;
+    justify-content: center; /* centers horizontally */
+    align-items: flex-start; /* centers vertically */
+    flex-direction: column;
+    width: auto;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: /*#953553*/ antiquewhite;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}

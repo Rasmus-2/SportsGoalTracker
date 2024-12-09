@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "AI Coach";
 }
-
+<div class="form-container m-3">
 <h3>AI Coach</h3>
 
 @if (!string.IsNullOrEmpty(Model.Completion))
@@ -14,3 +14,4 @@ else
 {
     <p>Loading response...</p>
 }
+</div>
