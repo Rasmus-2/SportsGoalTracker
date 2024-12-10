@@ -21,10 +21,19 @@ namespace SportsGoalApp
             // Add services to the container.
             builder.Services.AddRazorPages();
 
+            //Cookies
+            builder.Services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             // Register HttpClient
             builder.Services.AddHttpClient();
 
             var app = builder.Build();
+
+            app.UseCookiePolicy();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
