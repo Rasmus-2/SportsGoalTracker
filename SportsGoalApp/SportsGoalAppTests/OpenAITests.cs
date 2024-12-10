@@ -107,7 +107,7 @@ namespace SportsGoalAppTests
         }
 
         [Fact]
-        public void CoachController_ListAdviceFromDatabase()
+        public void CoachController_ListsAdviceFromDatabase()
         {
             DbContextOptionsBuilder<SportsGoalAppContext> optionsBuilder = new();
             optionsBuilder.UseInMemoryDatabase(MethodBase.GetCurrentMethod().Name);
