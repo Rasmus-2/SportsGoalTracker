@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -6,6 +7,7 @@ using SportsGoalApp.Models;
 
 namespace SportsGoalApp.Pages
 {
+    [Authorize]
     public class PracticeLogModel : PageModel
     {
         private readonly Data.SportsGoalAppContext _context;
