@@ -26,9 +26,6 @@ namespace SportsGoalApp.Pages
 
         public string ErrorMessage { get; set; }
 
-        [BindProperty]
-        public List<string> MyCategories { get; set; }
-
         public async Task OnGetAsync(bool dateError)
         {
             if (dateError)

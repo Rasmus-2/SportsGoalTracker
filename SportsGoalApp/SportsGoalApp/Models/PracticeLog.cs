@@ -13,8 +13,5 @@
         public int? TotalNumber { get; set; }
         public int? SuccessfulNumber { get; set; }
         public float? Percentage { get; set; }
-
-
-
     }
 }
