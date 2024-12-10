@@ -8,10 +8,10 @@
 
 @if(showBannerFlag  == true)
 {
-	<div id="cookieConsentdiv" class="alert alert-warning">
+	<div id="cookieConsentdiv" class="cookie-banner">
 		<h3 class="display-6">Our Cookie Policy</h3>
-		<p>Please accept our <a asp-page="/Privacy">Cookie Policy</a></p>
-		<button type="button" data-cookie-string="@cookieStr">
+		<p>Please accept our <a asp-page="/Privacy" class="custom-link">Policy</a></p>
+		<button class="button" type="button" data-cookie-string="@cookieStr">
 			<span aria-hidden="true">Accept</span>
 		</button>
 	</div>
