@@ -57,6 +57,10 @@ namespace SportsGoalApp.Pages
                 .OrderByDescending(l => l.DateTime)
                 .FirstOrDefaultAsync();
 
+            //Query for the latest achievements
+            Helpers.AchievementChecker achievementChecker = new Helpers.AchievementChecker(_userManager, _context);
+            //List<string> latestAchievement = achievementChecker.GetLatestAchievement(MyUser.Id);
+
 
 
         }
