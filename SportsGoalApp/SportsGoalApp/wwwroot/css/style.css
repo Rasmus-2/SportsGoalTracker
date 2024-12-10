@@ -142,3 +142,17 @@
     .custom-link:hover {
         color: #555; /* Optional: Change color on hover */
     }
+.form-container-custom {
+    display: flex;
+    justify-content: stretch ; 
+    align-items: stretch; /* Centers vertically */
+    flex-direction: column;
+    width: auto;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: antiquewhite; /* or #953553 if you uncomment */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+
