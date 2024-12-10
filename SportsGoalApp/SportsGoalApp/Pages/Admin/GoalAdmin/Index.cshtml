@@ -34,6 +34,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Goal[0].GoalNumber)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Goal[0].Success)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -60,6 +63,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.GoalNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Success)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

@@ -12,8 +12,9 @@ namespace SportsGoalApp.Models
         public string? Description { get; set; }
 
         [EnumDataType(typeof(Enums.GoalCategories))]
-        public Enums.GoalCategories Category {  get; set; }
-        
+        public Enums.GoalCategories Category { get; set; }
+
         public int? GoalNumber { get; set; }
+        public bool? Success { get; set; }
     }
 }

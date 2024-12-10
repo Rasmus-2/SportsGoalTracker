@@ -22,4 +22,5 @@ public class SportsGoalAppContext : IdentityDbContext<SportsGoalAppUser>, ISport
     public DbSet<Models.Goal> Goals { get; set; }
     public DbSet<Models.PracticeLog> Practices { get; set; }
     public DbSet<Models.CoachingAdvices> CoachingAdvices { get; set; }
+    public DbSet<Models.UserAchievement> UserAchievements { get; set; }
 }
