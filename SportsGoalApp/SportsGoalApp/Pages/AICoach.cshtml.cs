@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -7,12 +8,14 @@ using System.Text.Json;
 
 namespace SportsGoalApp.Pages
 {
+    [Authorize]
     public class AICoachModel : PageModel
     {
         private readonly HttpClient _httpClient;
         private readonly Data.SportsGoalAppContext _context;
 
         public string Completion { get; private set; }
+        public List<CoachingAdvices> LastThreeAdvices { get; private set; }
 
         public AICoachModel(HttpClient httpClient, Data.SportsGoalAppContext context)
         {
@@ -75,11 +78,27 @@ namespace SportsGoalApp.Pages
 
                 Completion = responseJson?.CoachingAdvice ?? "No response from the API";
 
+                var newAdvice = new CoachingAdvices
+                {
+                    UserID = User.Identity.Name,
+                    Advice = Completion,
+                    CreatedAt = DateTime.UtcNow
+                };
+                _context.CoachingAdvices.Add(newAdvice);
+                await _context.SaveChangesAsync();
+
+
             }
             else
             {
                 Completion = "Error fixing sentence";
             }
+
+            LastThreeAdvices = await _context.CoachingAdvices
+                .Where(a => a.UserID == User.Identity.Name)
+                .OrderByDescending(a => a.CreatedAt)
+                .Take(3)
+                .ToListAsync();
         }
 
         private class SentencePayloadResponse

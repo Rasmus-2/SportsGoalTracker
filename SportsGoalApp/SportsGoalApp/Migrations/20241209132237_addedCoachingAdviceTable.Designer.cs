@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SportsGoalApp.Data;
 
@@ -11,9 +12,11 @@ using SportsGoalApp.Data;
 namespace SportsGoalApp.Migrations
 {
     [DbContext(typeof(SportsGoalAppContext))]
-    partial class SportsGoalAppContextModelSnapshot : ModelSnapshot
+    [Migration("20241209132237_addedCoachingAdviceTable")]
+    partial class addedCoachingAdviceTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -283,9 +286,6 @@ namespace SportsGoalApp.Migrations
                     b.Property<DateOnly>("StartDate")
                         .HasColumnType("date");
 
-                    b.Property<bool?>("Success")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
@@ -340,29 +340,6 @@ namespace SportsGoalApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Practices");
-                });
-
-            modelBuilder.Entity("SportsGoalApp.Models.UserAchievement", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AchievementId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateAchieved")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserAchievements");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

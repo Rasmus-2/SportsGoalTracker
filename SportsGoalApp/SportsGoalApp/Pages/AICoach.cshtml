@@ -8,10 +8,20 @@
 
 @if (!string.IsNullOrEmpty(Model.Completion))
 {
-    <blockquote>@Model.Completion</blockquote>
+    <blockquote>@Model.LastThreeAdvices.FirstOrDefault()?.Advice</blockquote>
+
+    <div>
+        <h4>Previous advices</h4>
+        @foreach(var advice in Model.LastThreeAdvices.Skip(1))
+        {
+            <p>@advice.Advice</p>
+        }
+    </div>
 }
 else
 {
     <p>Loading response...</p>
 }
 </div>
+
+
