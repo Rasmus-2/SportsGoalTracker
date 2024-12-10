@@ -44,7 +44,6 @@ namespace SportsGoalAppTests
             var controller = new ChartController(context);
 
             // Act
-
             var result = controller.GetChartData(); 
             var okResult = result as OkObjectResult;
 
