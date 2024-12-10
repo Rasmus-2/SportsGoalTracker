@@ -1,7 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
 using OpenAIApi;
+using SportsGoalApp.Controllers;
+using SportsGoalApp.Data;
+using SportsGoalApp.Models;
 using SportsGoalAppTests.Mock;
 using System.Net.Http.Json;
+using System.Reflection;
 
 namespace SportsGoalAppTests
 {
@@ -98,6 +104,66 @@ namespace SportsGoalAppTests
 
             Assert.False(string.IsNullOrEmpty(content1.CoachingAdvice));
             Assert.False(string.IsNullOrEmpty(content2.CoachingAdvice));
+        }
+
+        [Fact]
+        public void CoachController_ListAdviceFromDatabase()
+        {
+            DbContextOptionsBuilder<SportsGoalAppContext> optionsBuilder = new();
+            optionsBuilder.UseInMemoryDatabase(MethodBase.GetCurrentMethod().Name);
+
+            using (SportsGoalAppContext ctx = new(optionsBuilder.Options))
+            {
+                ctx.Add(new CoachingAdvices
+                {
+                    UserID = "Mat@hotmail.com",
+                    CreatedAt = DateTime.UtcNow,
+                    Advice = "You're doing great, keep going!"
+                });
+                ctx.SaveChanges();
+            }
+            IActionResult result;
+            using (var ctx = new SportsGoalAppContext(optionsBuilder.Options))
+            {
+                result = new AdviceController(ctx).List();
+            }
+
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var advices = Assert.IsType<List<CoachingAdvices>>(okResult.Value);
+            var advice = Assert.Single(advices);
+            Assert.NotNull(advice);
+            Assert.Equal(1, advice.Id);
+            Assert.Equal("Mat@hotmail.com", advice.UserID);
+            Assert.Equal("You're doing great, keep going!", advice.Advice);
+        }
+
+        public void CoachController_GetsAdviceFromDatabase()
+        {
+            DbContextOptionsBuilder<SportsGoalAppContext> optionsBuilder = new();
+            optionsBuilder.UseInMemoryDatabase(MethodBase.GetCurrentMethod().Name);
+
+            using (SportsGoalAppContext ctx = new(optionsBuilder.Options))
+            {
+                ctx.Add(new CoachingAdvices
+                {
+                    UserID = "Mat@hotmail.com",
+                    CreatedAt = DateTime.UtcNow,
+                    Advice = "You're doing great, keep going!"
+                });
+                ctx.SaveChanges();
+            }
+            IActionResult result;
+            using (var ctx = new SportsGoalAppContext(optionsBuilder.Options))
+            {
+                result = new AdviceController(ctx).List();
+            }
+
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var advice = Assert.IsType<CoachingAdvices>(okResult.Value);
+            Assert.NotNull(advice);
+            Assert.Equal(1, advice.Id);
+            Assert.Equal("Mat@hotmail.com", advice.UserID);
+            Assert.Equal("You're doing great, keep going!", advice.Advice);
         }
 
     }
