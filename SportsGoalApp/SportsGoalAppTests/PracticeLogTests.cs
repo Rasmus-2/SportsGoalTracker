@@ -1,10 +1,16 @@
-using SportsGoalApp.Models;
-using Xunit;
+using SportsGoalApp.Utilities;
 
 namespace SportsGoalAppTests
 {
     public class PracticeLogTests
     {
+
+        private readonly ICalculatePercentage _percentageCalculator;
+
+        public PracticeLogTests()
+        {
+            _percentageCalculator = new PercentageCalculator();
+        }
 
         [Theory]
         [InlineData(100, 50, 50)]
@@ -13,52 +19,24 @@ namespace SportsGoalAppTests
         public void CalculatePercantage_ValidInputs_ReturnExpectedPercentage(int totalNumber, int successfulNumber, float expected)
         {
             // Arrange
-            var practiceLog = new PracticeLog
-            {
-                TotalNumber = totalNumber,
-                SuccessfulNumber = successfulNumber
-            };
-
-            float actual = 0;
 
             // Act
-            if (practiceLog.TotalNumber.HasValue && practiceLog.SuccessfulNumber.HasValue && practiceLog.TotalNumber.Value > 0)
-            {
-                actual = (float)practiceLog.SuccessfulNumber.Value / practiceLog.TotalNumber.Value * 100;
-            }
-            else
-            {
-                actual = 0;
-            }
+            float actual = _percentageCalculator.CalculatePercentage(totalNumber, successfulNumber);
 
             // Assert 
-            Assert.Equal(expected, actual);
+            Assert.Equal(expected, actual, 2);
         }
-        
+
         [Theory]
         [InlineData(0, 0)]
         [InlineData(100, 0)]
         public void CalculatePercentage_ZeroOrNoSuccessful_ReturnsZeroPercentage(int totalNumber, int successfulNumber)
         {
             // Arrange
-            var practiceLog = new PracticeLog
-            {
-                TotalNumber = totalNumber,
-                SuccessfulNumber = successfulNumber
-            };
-
-            float actual = 0;
             float expected = 0;
 
             // Act
-            if (practiceLog.TotalNumber.HasValue && practiceLog.SuccessfulNumber.HasValue && practiceLog.TotalNumber.Value > 0)
-            {
-                actual = (float)practiceLog.SuccessfulNumber.Value / practiceLog.TotalNumber.Value * 100;
-            }
-            else
-            {
-                actual = 0;
-            }
+            float actual = _percentageCalculator.CalculatePercentage(totalNumber, successfulNumber);
 
             // Assert
             Assert.Equal(expected, actual);
@@ -71,24 +49,10 @@ namespace SportsGoalAppTests
         public void CalculatePercentage_NullInputs_ReturnsZeroPercentage(int? totalNumber, int? successfulNumber)
         {
             // Arrange
-            var practiceLog = new PracticeLog
-            {
-                TotalNumber = totalNumber,
-                SuccessfulNumber = successfulNumber
-            };
-
             float expected = 0;
-            float actual = 0;
 
             // Act
-            if (practiceLog.TotalNumber.HasValue && practiceLog.SuccessfulNumber.HasValue && practiceLog.TotalNumber.Value > 0)
-            {
-                actual = (float)practiceLog.SuccessfulNumber.Value / practiceLog.TotalNumber.Value * 100;
-            }
-            else
-            {
-                actual = 0;
-            }
+            float actual = _percentageCalculator.CalculatePercentage(totalNumber, successfulNumber);
 
 
             // Assert
@@ -104,23 +68,9 @@ namespace SportsGoalAppTests
         public void CalculatePercentage_DifferentValidInputs_ReturnsExpectedPercentageWithDecimals(int totalNumber, int successfulNumber, float expected)
         {
             // Arrange
-            var practiceLog = new PracticeLog
-            {
-                TotalNumber = totalNumber,
-                SuccessfulNumber = successfulNumber,
-            };
-
-            float actual = 0;
 
             // Act
-            if (practiceLog.TotalNumber.HasValue && practiceLog.SuccessfulNumber.HasValue && practiceLog.TotalNumber.Value > 0)
-            {
-                actual = (float)practiceLog.SuccessfulNumber.Value / practiceLog.TotalNumber.Value * 100;
-            }
-            else
-            {
-                actual = 0;
-            }
+            float actual = _percentageCalculator.CalculatePercentage(totalNumber, successfulNumber);
 
             // Assert
             float tolerance = 0.00001f;
