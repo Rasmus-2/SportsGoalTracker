@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+
 namespace SportsGoalApp.Models
 {
     public class Goal

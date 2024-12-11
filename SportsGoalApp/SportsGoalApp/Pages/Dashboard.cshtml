@@ -41,7 +41,7 @@
         </div>
         <div class="col-md-4">
             <div class="p-3 border" style="background-color: antiquewhite">
-                @if(Model.GoalList != null)
+                @if(Model.GoalList != null && Model.GoalList.Any())
                 {
                     foreach(var goal in Model.GoalList)
                     {
@@ -65,13 +65,24 @@
                 <!--Upper row-->
                 <div style="height: 100px;">
                     <div class="row">
-                    @if(Model.CurrentPracticeLog != null)
-                    {
-                        <h6 class="fw-bold">Latest Log</h6>
-                        <p>Acticity: @Model.CurrentPracticeLog.Activity</p>
-                        <p>Duration: @Model.CurrentPracticeLog.Duration @Model.CurrentPracticeLog.DurationUnit</p>
-                        <p>Notes: @Model.CurrentPracticeLog.Notes</p>
-                    }
+                        <div class="col-md-8">
+                            @if(Model.CurrentPracticeLog != null)
+                            {
+                                <h6 class="fw-bold">Latest Log</h6>
+                                <p>@Model.CurrentPracticeLog.DateTime</p>
+                                <p>Acticity: @Model.CurrentPracticeLog.Activity</p>
+                                <p>Duration: @Model.CurrentPracticeLog.Duration @Model.CurrentPracticeLog.DurationUnit</p>
+                                <p>Notes: @Model.CurrentPracticeLog.Notes</p>
+                            }
+                            else
+                            {
+                                <div class="alert">No practice log yet.....</div>
+                            }
+                        </div>
+                        <div class="col-md-4">
+                            <!--Achievements will be here-->
+                            <p class="alert">No achievement to show yet..</p>
+                        </div>
                     </div>
                 </div>
                 <br />
@@ -79,7 +90,7 @@
                 <br />
                 <br />
                 <div class="row mt-2">
-                    <!--Lowe row-->
+                    <!--Lower row-->
                     <div style="height: 200px;">
                         <canvas id="myChart" style="width: 100%; height: 200px;"></canvas>
                     </div>
