@@ -59,8 +59,7 @@ namespace SportsGoalApp.Pages
 
             //Query for the latest achievements
             Helpers.AchievementChecker achievementChecker = new Helpers.AchievementChecker(_userManager, _context);
-            //List<string> latestAchievement = achievementChecker.GetLatestAchievement(MyUser.Id);
-
+            List<string> latestAchievement = await achievementChecker.GetLatestAchievement(MyUser.Id);
 
 
         }
