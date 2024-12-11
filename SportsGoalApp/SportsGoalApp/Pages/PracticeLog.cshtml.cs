@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,6 +8,7 @@ using SportsGoalApp.Utilities;
 
 namespace SportsGoalApp.Pages
 {
+    [Authorize]
     public class PracticeLogModel : PageModel
     {
         private readonly Data.SportsGoalAppContext _context;
@@ -77,7 +79,7 @@ namespace SportsGoalApp.Pages
             _context.Practices.Add(newPracticeLog);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Dashboard");
         }
 
         public void CalculatePercentage()

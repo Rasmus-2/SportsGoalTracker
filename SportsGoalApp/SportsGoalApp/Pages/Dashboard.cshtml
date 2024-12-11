@@ -3,38 +3,89 @@
 @{
 }
 
-@section Navbar{
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
-        <div class="container">
-            <a class="navbar-brand" asp-area="" asp-page="/Index">SportsGoalApp</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1 justify-content-end">
-                    @if(User.Identity.IsAuthenticated)
-                    {
-                        <li class="nav-item">
-                            <a>Hi, @User.Identity.Name</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li><a href="/Identity/Account/Login">Login</a></li>
-                    }
-                    <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-}
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/lib/chart.js-4.4.7"></script>
+    <script src="~/js/createChart.js"></script>
+    <script src="~/js/fetchChart.js"></script>
+</head>
+
 
 <div class="container">
+    <h1 class="display-6">Dashboard</h1>
+    @if(Model.MyUser != null)
+    {
+    <h3>Sport: @Model.MyUser.ChosenSport</h3>
+    }
+    
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card p-3 border" style="background-color: antiquewhite">
+                @if(Model.CurrentGoal != null)
+                {
+                <h4 class="card-title bg-gradient">Current Goal</h4>
+                <h5 class="card-body">@Model.CurrentGoal.Title</h5>
+                <h6>Period: @Model.CurrentGoal.StartDate- @Model.CurrentGoal.EndDate</h6>
+                <h6>Target: @Model.CurrentGoal.GoalNumber</h6>
+                    <p>@Model.CurrentGoal.Description</p>
+                }
+                else
+                {
+                    <div class="alert">No current goal.....</div>
+                }
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 border" style="background-color: antiquewhite">
+                @if(Model.GoalList != null)
+                {
+                    foreach(var goal in Model.GoalList)
+                    {
+                       <div class="card">
+                           <p class="card-body fw-bolder">@goal.Title</p>
+                       </div>
+                        <a href="/AllGoals">View Goals</a>
+                    }
+                }
+                else
+                {
+                    <div class="alert">No goals yet.....</div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12" style="background-color: antiquewhite">
+            <div class="p-3 border">
+                <!--Upper row-->
+                <div style="height: 100px;">
+                    <div class="row">
+                    @if(Model.CurrentPracticeLog != null)
+                    {
+                        <h6 class="fw-bold">Latest Log</h6>
+                        <p>Acticity: @Model.CurrentPracticeLog.Activity</p>
+                        <p>Duration: @Model.CurrentPracticeLog.Duration @Model.CurrentPracticeLog.DurationUnit</p>
+                        <p>Notes: @Model.CurrentPracticeLog.Notes</p>
+                    }
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <div class="row mt-2">
+                    <!--Lowe row-->
+                    <div style="height: 200px;">
+                        <canvas id="myChart" style="width: 100%; height: 200px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>

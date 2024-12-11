@@ -1,12 +1,68 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using SportsGoalApp.Models;
+
 
 namespace SportsGoalApp.Pages
 {
+    [Authorize]
     public class DashboardModel : PageModel
     {
-        public void OnGet()
+        public Areas.Identity.Data.SportsGoalAppUser MyUser { get; set; }
+
+        private readonly UserManager<Areas.Identity.Data.SportsGoalAppUser> _userManager;
+
+        private readonly Data.SportsGoalAppContext _context;
+
+        [BindProperty]
+        public Goal Goal {  get; set; }
+
+        [BindProperty]
+        public Goal CurrentGoal { get; set; }
+        public List<Models.Goal> GoalList { get; set; }
+        
+        [BindProperty]
+        public PracticeLog CurrentPracticeLog { get; set; }
+        public List<Models.PracticeLog> PracticeLogList { get; set; }
+
+
+        public DashboardModel(UserManager<Areas.Identity.Data.SportsGoalAppUser> userManager, Data.SportsGoalAppContext context)
         {
+            _context = context;
+            _userManager = userManager;
+        }
+        public async Task  OnGetAsync()
+        {
+
+            MyUser = await _userManager.GetUserAsync(User);
+            // Get today's date as DateOnly
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            // Query for the current goal
+            CurrentGoal = await _context.Goals
+                .Where(g => g.StartDate <= today && g.EndDate >= today)
+                .OrderBy(g => g.EndDate)
+                .FirstOrDefaultAsync();
+
+            // Query for the list of goals starting today or later
+            GoalList = await _context.Goals
+                .Where(g => g.StartDate >= today)
+                .ToListAsync();
+
+            // Query for the current practice log
+            CurrentPracticeLog = await _context.Practices
+                .OrderByDescending(l => l.DateTime)
+                .FirstOrDefaultAsync();
+
+            //Query for the latest achievements
+            Helpers.AchievementChecker achievementChecker = new Helpers.AchievementChecker(_userManager, _context);
+            //List<string> latestAchievement = achievementChecker.GetLatestAchievement(MyUser.Id);
+
+
+
         }
     }
 }

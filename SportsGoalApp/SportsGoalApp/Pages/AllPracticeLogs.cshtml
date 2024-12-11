@@ -1,8 +1,11 @@
-﻿@page
+@page
 @model SportsGoalApp.Pages.AllPracticeLogsModel
 @{
     ViewData["Title"] = "All practice logs";
 }
+
+
+<div class="form-container m-3">
 
 <h3>All practice logs</h3>
 
@@ -38,3 +41,6 @@
         </tbody>
     </table>
 }
+
+</div>
+<a class="button text-light" id="dashboard" asp-page="/Dashboard">Back to dashboard</a>

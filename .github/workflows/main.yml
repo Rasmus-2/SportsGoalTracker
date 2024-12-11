@@ -11,6 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: test
 
     steps:
     - name: Checkout code
@@ -32,5 +33,7 @@ jobs:
 
     
     - name: Test
-      run: dotnet test SportsGoalApp/SportsGoalAppTests/SportsGoalAppTests.csproj --no-build --verbosity normal
-    
+      env:
+        ChatGpt__ApiKey: ${{ secrets.API_KEY }}
+      run: dotnet test SportsGoalApp/SportsGoalAppTests/SportsGoalAppTests.csproj --no-build --verbosity normal   
+

@@ -1,0 +1,27 @@
+﻿@page
+@model SportsGoalApp.Pages.AICoachModel
+@{
+    ViewData["Title"] = "AI Coach";
+}
+<div class="form-container m-3">
+<h3>AI Coach</h3>
+
+@if (!string.IsNullOrEmpty(Model.Completion))
+{
+    <blockquote>@Model.LastThreeAdvices.FirstOrDefault()?.Advice</blockquote>
+
+    <div>
+        <h4>Previous advices</h4>
+        @foreach(var advice in Model.LastThreeAdvices.Skip(1))
+        {
+            <p>@advice.Advice</p>
+        }
+    </div>
+}
+else
+{
+    <p>Loading response...</p>
+}
+</div>
+
+
