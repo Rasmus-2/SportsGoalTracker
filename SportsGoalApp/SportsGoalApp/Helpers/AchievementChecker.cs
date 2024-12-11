@@ -44,6 +44,38 @@ namespace SportsGoalApp.Helpers
         public List<bool> completedAchievementsIds { get; set; }
         public string[,] achievementsMatrix { get; set; }
 
+        //Returns a string list with 3 items from the latest achievement achieved, if any;
+        //"Achievement name", "description", "date completed"
+        public async Task<List<string>> GetLatestAchievement(string userId)
+        {
+            List<UserAchievement> userAchievements = await _context.UserAchievements.Where(u => u.UserId == userId).ToListAsync();
+            if(userAchievements.Count == 1)
+            {
+                return CreateLatestAchievementList(userAchievements.FirstOrDefault());
+            }
+            else if (userAchievements.Count > 1)
+            {
+                userAchievements =  userAchievements.OrderByDescending(u => u.DateAchieved).ToList();
+                return CreateLatestAchievementList(userAchievements.FirstOrDefault());
+            }
+            return new List<string>();
+        }
+
+        private List<string> CreateLatestAchievementList(UserAchievement userAchievement)
+        {
+            int achievementId = userAchievement.AchievementId - 1;
+            string achievementName = achievementsMatrix[achievementId, 0];
+            string achievementDescription = achievementsMatrix[achievementId, 1];
+
+            List<string> latestAchievement = new List<string>()
+            {
+                achievementName,
+                achievementDescription,
+                userAchievement.DateAchieved.ToString()
+            };
+            return latestAchievement;
+        }
+
         public async Task CheckAll(string userId)
         {
             completedAchievementsIds.Add(await SkillNoviceCheck(userId));
