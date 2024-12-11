@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SportsGoalApp.Areas.Identity.Data;
 using SportsGoalApp.Data;
+using SportsGoalApp.Utilities;
 namespace SportsGoalApp
 {
     public class Program
@@ -17,10 +17,11 @@ namespace SportsGoalApp
 
             builder.Services.AddDefaultIdentity<Areas.Identity.Data.SportsGoalAppUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<SportsGoalAppContext>();
-                
+
             // Add services to the container.
             builder.Services.AddRazorPages();
 
+            builder.Services.AddScoped<ICalculatePercentage, PercentageCalculator>();
             //Cookies
             builder.Services.Configure<CookiePolicyOptions>(options =>
             {

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SportsGoalApp.Models;
+using SportsGoalApp.Utilities;
 
 namespace SportsGoalApp.Pages
 {
@@ -11,15 +12,17 @@ namespace SportsGoalApp.Pages
     public class PracticeLogModel : PageModel
     {
         private readonly Data.SportsGoalAppContext _context;
+        private readonly ICalculatePercentage _percentageCalculator;
         private UserManager<Areas.Identity.Data.SportsGoalAppUser> _userManager { get; set; }
 
         public Areas.Identity.Data.SportsGoalAppUser MyUser { get; set; }
 
-        public PracticeLogModel(Data.SportsGoalAppContext context, UserManager<Areas.Identity.Data.SportsGoalAppUser> userManager)
+        public PracticeLogModel(Data.SportsGoalAppContext context, UserManager<Areas.Identity.Data.SportsGoalAppUser> userManager, ICalculatePercentage percentageCalculator)
         {
             _context = context;
             PracticeLog = new PracticeLog();
             _userManager = userManager;
+            _percentageCalculator = percentageCalculator;
         }
 
         [BindProperty]
@@ -53,7 +56,10 @@ namespace SportsGoalApp.Pages
             PracticeLog.UserId = user.Id;
 
             // Set other properties and calculate percentage
-            CalculatePercentage();
+            PracticeLog.Percentage = _percentageCalculator.CalculatePercentage(
+                PracticeLog.TotalNumber,
+                PracticeLog.SuccessfulNumber
+            );
 
             // Create the new practice log entry
             var newPracticeLog = new PracticeLog
