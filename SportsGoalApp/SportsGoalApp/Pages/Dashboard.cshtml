@@ -41,6 +41,7 @@
         </div>
         <div class="col-md-4">
             <div class="p-3 border" style="background-color: antiquewhite">
+                <h6 class="fw-bold">Upcoming Goal</h6>
                 @if(Model.GoalList != null && Model.GoalList.Any())
                 {
                     foreach(var goal in Model.GoalList)
@@ -48,12 +49,12 @@
                        <div class="card">
                            <p class="card-body fw-bolder">@goal.Title</p>
                        </div>
-                        <a href="/AllGoals">View Goals</a>
                     }
+                    <a href="/AllGoals">View Goals</a>
                 }
                 else
                 {
-                    <div class="alert">No goals yet.....</div>
+                    <div class="alert">No upcoming goal..</div>
                 }
             </div>
         </div>
@@ -80,8 +81,17 @@
                             }
                         </div>
                         <div class="col-md-4">
-                            <!--Achievements will be here-->
-                            <p class="alert">No achievement to show yet..</p>
+                            <!--Achievements-->
+                            <h6 class="fw-bold">Latest Achievement</h6>
+                            @if (Model.LatestUserAchievement != null)
+                            {
+                                <p>@Model.LatestUserAchievement.DateAchieved</p>
+                                <p>@Model.LatestUserAchievement.AchievementId</p>
+                            }
+                            else
+                            {
+                                <p class="alert">No achievement to show yet..</p>
+                            }
                         </div>
                     </div>
                 </div>
