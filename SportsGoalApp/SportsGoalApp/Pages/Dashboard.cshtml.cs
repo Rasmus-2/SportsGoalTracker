@@ -26,7 +26,9 @@ namespace SportsGoalApp.Pages
         
         [BindProperty]
         public PracticeLog CurrentPracticeLog { get; set; }
-        public List<Models.PracticeLog> PracticeLogList { get; set; }
+
+        [BindProperty]
+        public UserAchievement LatestUserAchievement { get; set; }
 
 
         public DashboardModel(UserManager<Areas.Identity.Data.SportsGoalAppUser> userManager, Data.SportsGoalAppContext context)
@@ -51,6 +53,16 @@ namespace SportsGoalApp.Pages
             GoalList = await _context.Goals
                 .Where(g => g.StartDate >= today)
                 .ToListAsync();
+
+            // Query for the next goal starting after the current goal's end date
+            if (CurrentGoal != null)
+            {
+                GoalList = await _context.Goals
+                    .Where(g => g.StartDate > CurrentGoal.EndDate)
+                    .OrderBy(g => g.StartDate)
+                    .Take(1) // Get only the next upcoming goal
+                    .ToListAsync();
+            }
 
             // Query for the current practice log
             CurrentPracticeLog = await _context.Practices

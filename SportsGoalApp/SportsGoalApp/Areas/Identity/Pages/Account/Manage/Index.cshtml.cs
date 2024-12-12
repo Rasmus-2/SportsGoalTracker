@@ -56,21 +56,43 @@ namespace SportsGoalApp.Areas.Identity.Pages.Account.Manage
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Phone]
-            [Display(Name = "Phone number")]
-            public string PhoneNumber { get; set; }
+            //[Phone]
+            //[Display(Name = "Phone number")]
+            //public string PhoneNumber { get; set; }
+            [Display(Name = "Forename")]
+            public string Forename { get; set; }
+
+            [Display(Name = "Surname")]
+            public string Surname { get; set; }
+
+            [Display(Name = "Age")]
+            public int Age { get; set; }
+
+            [Display(Name = "Chosen sport")]
+            public string ChosenSport { get; set; }
+
         }
 
         private async Task LoadAsync(SportsGoalAppUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var userForename = user.Forename;
+            var userSurname = user.Surname;
+            var userAge = user.Age;
+            var userChosenSport = user.ChosenSport;
+
 
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                //PhoneNumber = phoneNumber
+                Forename = userForename,
+                Surname = userSurname,
+                Age = (int)userAge,
+                ChosenSport = userChosenSport
+                
             };
         }
 
@@ -100,16 +122,28 @@ namespace SportsGoalApp.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //if (Input.PhoneNumber != phoneNumber)
+            //{
+            //    var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+            //    if (!setPhoneResult.Succeeded)
+            //    {
+            //        StatusMessage = "Unexpected error when trying to set phone number.";
+            //        return RedirectToPage();
+            //    }
+            //}
+            user.Forename = Input.Forename; 
+            user.Surname = Input.Surname; 
+            user.Age = Input.Age; 
+            user.ChosenSport = Input.ChosenSport; 
+
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
-                    return RedirectToPage();
-                }
+                StatusMessage = "Unexpected error when trying to update profile.";
+                return RedirectToPage();
             }
+
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
