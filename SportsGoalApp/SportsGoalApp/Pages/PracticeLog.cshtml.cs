@@ -79,6 +79,12 @@ namespace SportsGoalApp.Pages
             _context.Practices.Add(newPracticeLog);
             await _context.SaveChangesAsync();
 
+            if (newPracticeLog.GoalId != null)
+            {
+                Helpers.GoalChecker goalChecker = new Helpers.GoalChecker(_userManager, _context);
+                await goalChecker.CheckIfAchieved(newPracticeLog.GoalId);
+            }
+
             return RedirectToPage("./Dashboard");
         }
 
