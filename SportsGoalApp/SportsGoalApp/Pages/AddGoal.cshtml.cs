@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using SportsGoalApp.Areas.Identity.Data;
 using SportsGoalApp.Enums;
 using SportsGoalApp.Models;
+using SportsGoalApp.Utilities;
 
 namespace SportsGoalApp.Pages
 {
@@ -14,11 +15,13 @@ namespace SportsGoalApp.Pages
     {
         private UserManager<Areas.Identity.Data.SportsGoalAppUser> _userManager { get; set; }
         private readonly Data.SportsGoalAppContext _context;
+        private readonly IAvailableDateChecker _availableDateChecker;
 
-        public AddGoalModel(UserManager<Areas.Identity.Data.SportsGoalAppUser> userManager, Data.SportsGoalAppContext context)
+        public AddGoalModel(UserManager<Areas.Identity.Data.SportsGoalAppUser> userManager, Data.SportsGoalAppContext context, IAvailableDateChecker availableDateChecker)
         {
             _userManager = userManager;
             _context = context;
+            _availableDateChecker = availableDateChecker;
         }
 
         [BindProperty]
@@ -49,11 +52,8 @@ namespace SportsGoalApp.Pages
             {
                 foreach (var goal in myGoals)
                 {
-                    if (NewGoal.StartDate <= goal.EndDate && NewGoal.EndDate >= goal.StartDate)
-                    {
-                        forbiddenDate = true;
-                        break;
-                    }
+                    forbiddenDate = _availableDateChecker.CheckForbiddenDate(goal.EndDate, goal.StartDate, NewGoal.StartDate, NewGoal.EndDate);
+                    if (forbiddenDate) break;
                 }
             }
 
